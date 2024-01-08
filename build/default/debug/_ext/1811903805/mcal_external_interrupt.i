@@ -4866,20 +4866,21 @@ static STD_ReturnType interrupt_INTx_Enable(Interrupt_INTx_t * obj) {
     if (((void*)0) == obj) {
         ret = (STD_ReturnType) 0x00;
     } else {
-        switch(obj->src){
-            case EXT_INT0 :
+        ret = (STD_ReturnType) 0x01;
+        switch (obj->src) {
+            case EXT_INT0:
                 (INTCONbits.INT0IE = 1);
                 ret = (STD_ReturnType) 0x01;
                 break;
-            case EXT_INT1 :
+            case EXT_INT1:
                 (INTCON3bits.INT1E = 1);
                 ret = (STD_ReturnType) 0x01;
                 break;
-            case EXT_INT2 :
+            case EXT_INT2:
                 (INTCON3bits.INT2E = 1);
                 ret = (STD_ReturnType) 0x01;
                 break;
-            default : ret = (STD_ReturnType) 0x00;
+            default: ret = (STD_ReturnType) 0x00;
         }
     }
     return ret;
@@ -4890,7 +4891,9 @@ static STD_ReturnType interrupt_INTx_Disable(Interrupt_INTx_t * obj) {
     if (((void*)0) == obj) {
         ret = (STD_ReturnType) 0x00;
     } else {
+        ret = (STD_ReturnType) 0x01;
         switch (obj->src) {
+                ret = (STD_ReturnType) 0x01;
             case EXT_INT0:
                 (INTCONbits.INT0IE = 0);
                 break;
@@ -4955,6 +4958,7 @@ static STD_ReturnType interrupt_INTx_Pin_Init(Interrupt_INTx_t * obj) {
     }
     return ret;
 }
+
 
 
 static STD_ReturnType interrupt_INTx_Priority_Init(Interrupt_INTx_t * obj) {

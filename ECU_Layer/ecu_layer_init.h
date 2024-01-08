@@ -7,14 +7,15 @@
 
 #ifndef ECU_LAYER_INIT_H
 #define	ECU_LAYER_INIT_H
+#include    "../MCAL_Layer/GPIO/hal_gpio.h"
 #include    "LCD/ecu_lcd.h"
-/*
 #include    "7SEG/ecu_7seg.h"
 #include    "BUTTON/ecu_button.h"
 #include    "DC_MOTOR/ecu_dc_motor.h"
 #include    "KEYPAD/ecu_keypad.h"
 #include    "LED/ecu_led.h"
 #include    "RELAY/ecu_relay.h"
+/*
  */
 /*
 lcd_4bit_t lcd4 = {

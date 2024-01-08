@@ -29,22 +29,22 @@
 /*  Section : Macro Functions Declarations    */
 #if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
 
-#define INTERRUPT_PriorityLevelEnable()             (RCONbits_t.IPEN = 1)
-#define INTERRUPT_PriorityLevelDisable()            (RCONbits_t.IPEN = 0)
+#define INTERRUPT_PriorityLevelEnable()             (RCONbits.IPEN = 1)
+#define INTERRUPT_PriorityLevelDisable()            (RCONbits.IPEN = 0)
 
-#define  INTERRUPT_GlobalInterruptHighEnable()      (INTCONbits_t.GIEH = 1) 
-#define  INTERRUPT_GlobalInterruptHighDisable()     (INTCONbits_t.GIEH = 0)
+#define  INTERRUPT_GlobalInterruptHighEnable()      (INTCONbits.GIEH = 1) 
+#define  INTERRUPT_GlobalInterruptHighDisable()     (INTCONbits.GIEH = 0)
 
-#define  INTERRUPT_GlobalInterruptLowEnable()       (INTCONbits_t.GIEL = 1)
-#define  INTERRUPT_GlobalInterruptLowDisable()      (INTCONbits_t.GIEL = 0)
+#define  INTERRUPT_GlobalInterruptLowEnable()       (INTCONbits.GIEL = 1)
+#define  INTERRUPT_GlobalInterruptLowDisable()      (INTCONbits.GIEL = 0)
 
 #else
 
-#define  INTERRUPT_GlobalInterruptEnable()          (INTCONbits_t.GIE = 1) 
-#define  INTERRUPT_GlobalInterruptDisable()         (INTCONbits_t.GIE = 0)
+#define  INTERRUPT_GlobalInterruptEnable()          (INTCONbits.GIE = 1) 
+#define  INTERRUPT_GlobalInterruptDisable()         (INTCONbits.GIE = 0)
 
-#define  INTERRUPT_PeripherialInterruptEnable()     (INTCONbits_t.PEIE = 1)
-#define  INTERRUPT_PeripherialInterruptDisable()    (INTCONbits_t.PEIE = 0)
+#define  INTERRUPT_PeripherialInterruptEnable()     (INTCONbits.PEIE = 1)
+#define  INTERRUPT_PeripherialInterruptDisable()    (INTCONbits.PEIE = 0)
 
 #endif
 

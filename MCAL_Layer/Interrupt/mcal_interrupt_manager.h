@@ -19,7 +19,9 @@
 /*  Section : Data Type Declarations    */
 
 /*  Section : Function Declarations    */
-
+void INT0_ISR();
+void INT1_ISR();
+void INT2_ISR();
 
 
 #endif	/* MCAL_INTERRUPT_MANAGER_H */

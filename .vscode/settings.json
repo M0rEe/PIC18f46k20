@@ -38,10 +38,7 @@
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
   "C_Cpp_Runner.includePaths": [],
-  "C_Cpp_Runner.includeSearch": [
-    "*",
-    "**/*"
-  ],
+  "C_Cpp_Runner.includeSearch": ["*", "**/*"],
   "C_Cpp_Runner.excludeSearch": [
     "**/build",
     "**/build/**",
@@ -59,6 +56,9 @@
   "files.associations": {
     "application.h": "c",
     "ecu_layer_init.h": "c",
-    "ecu_dc_motor.h": "c"
+    "ecu_dc_motor.h": "c",
+    "mcal_external_interrupt.h": "c",
+    "hal_gpio.h": "c",
+    "mcal_std_types.h": "c"
   }
 }

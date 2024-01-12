@@ -4709,18 +4709,21 @@ typedef uint8_t STD_ReturnType ;
 # 1 "./ECU_Layer/../MCAL_Layer/GPIO/../device_config.h" 1
 # 15 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h" 2
 # 26 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h"
-typedef enum {
-    GPIO_LOW =0,
+typedef enum
+{
+    GPIO_LOW = 0,
     GPIO_HIGH
-}logic_t;
+} logic_t;
 
-typedef enum {
-    GPIO_DIRECTION_OUTPUT=0,
+typedef enum
+{
+    GPIO_DIRECTION_OUTPUT = 0,
     GPIO_DIRECTION_INPUT
-}direction_t;
+} direction_t;
 
-typedef enum {
-    GPIO_PIN0=0,
+typedef enum
+{
+    GPIO_PIN0 = 0,
     GPIO_PIN1,
     GPIO_PIN2,
     GPIO_PIN3,
@@ -4728,40 +4731,40 @@ typedef enum {
     GPIO_PIN5,
     GPIO_PIN6,
     GPIO_PIN7
-}pin_index_t;
+} pin_index_t;
 
-typedef enum {
-    PORTA_INDEX=0,
+typedef enum
+{
+    PORTA_INDEX = 0,
     PORTB_INDEX,
     PORTC_INDEX,
     PORTD_INDEX,
     PORTE_INDEX
-}port_index_t;
+} port_index_t;
 
-typedef struct {
-    uint8_t port :3;
-    uint8_t pin :3;
-    uint8_t direction :1;
-    uint8_t logic :1;
+typedef struct
+{
+    uint8_t port : 3;
+    uint8_t pin : 3;
+    uint8_t direction : 1;
+    uint8_t logic : 1;
 
-}pin_config_t;
-
-
+} pin_config_t;
 
 
 
 STD_ReturnType gpio_pin_direction_initialize(const pin_config_t *pin_config);
 STD_ReturnType gpio_pin_initialize(const pin_config_t *pin_config);
-STD_ReturnType gpio_pin_get_direction_status(const pin_config_t *pin_config,direction_t *direction_status );
-STD_ReturnType gpio_pin_write_logic( pin_config_t *pin_config,logic_t logic);
-STD_ReturnType gpio_pin_read_logic(const pin_config_t *pin_config,logic_t* logic);
-STD_ReturnType gpio_pin_toggle_logic( pin_config_t *pin_config);
+STD_ReturnType gpio_pin_get_direction_status(const pin_config_t *pin_config, direction_t *direction_status);
+STD_ReturnType gpio_pin_write_logic(pin_config_t *pin_config, logic_t logic);
+STD_ReturnType gpio_pin_read_logic(const pin_config_t *pin_config, logic_t *logic);
+STD_ReturnType gpio_pin_toggle_logic(pin_config_t *pin_config);
 
-STD_ReturnType gpio_port_direction_initialize(port_index_t port_num ,uint8_t direction);
-STD_ReturnType gpio_port_get_direction_status(port_index_t port_num ,uint8_t *direction_status );
-STD_ReturnType gpio_port_write_logic(port_index_t port_num ,uint8_t logic);
-STD_ReturnType gpio_port_read_logic(port_index_t port_num ,uint8_t* logic);
-STD_ReturnType gpio_port_toggle_logic(port_index_t port_num );
+STD_ReturnType gpio_port_direction_initialize(port_index_t port_num, uint8_t direction);
+STD_ReturnType gpio_port_get_direction_status(port_index_t port_num, uint8_t *direction_status);
+STD_ReturnType gpio_port_write_logic(port_index_t port_num, uint8_t logic);
+STD_ReturnType gpio_port_read_logic(port_index_t port_num, uint8_t *logic);
+STD_ReturnType gpio_port_toggle_logic(port_index_t port_num);
 # 11 "./ECU_Layer/ecu_layer_init.h" 2
 # 1 "./ECU_Layer/LED/ecu_led.h" 1
 # 14 "./ECU_Layer/LED/ecu_led.h"
@@ -4791,6 +4794,173 @@ STD_ReturnType led_on(const led_t * led);
 STD_ReturnType led_off(const led_t * led);
 STD_ReturnType led_toggle(const led_t * led);
 # 12 "./ECU_Layer/ecu_layer_init.h" 2
+# 1 "./ECU_Layer/LCD/ecu_lcd.h" 1
+# 13 "./ECU_Layer/LCD/ecu_lcd.h"
+# 1 "./ECU_Layer/LCD/ecu_lcd_cfg.h" 1
+# 14 "./ECU_Layer/LCD/ecu_lcd.h" 2
+# 45 "./ECU_Layer/LCD/ecu_lcd.h"
+typedef struct{
+    pin_config_t rs;
+    pin_config_t en;
+    pin_config_t data_pin[4];
+}lcd_4bit_t;
+
+typedef struct{
+    pin_config_t rs;
+    pin_config_t en;
+    pin_config_t data_pin[8];
+}lcd_8bit_t;
+
+STD_ReturnType lcd_4bit_intialize(const lcd_4bit_t *lcd);
+STD_ReturnType lcd_4bit_send_command(const lcd_4bit_t *lcd, uint8_t command);
+STD_ReturnType lcd_4bit_send_char_data(const lcd_4bit_t *lcd, uint8_t data);
+STD_ReturnType lcd_4bit_send_char_data_pos(const lcd_4bit_t *lcd,uint8_t row, uint8_t column, uint8_t data);
+STD_ReturnType lcd_4bit_send_string(const lcd_4bit_t *lcd, uint8_t *str);
+STD_ReturnType lcd_4bit_send_string_pos(const lcd_4bit_t *lcd, uint8_t row, uint8_t column, uint8_t *str);
+STD_ReturnType lcd_4bit_send_custom_char(const lcd_4bit_t *lcd, uint8_t row, uint8_t column,
+                                         const uint8_t _chr[], uint8_t mem_pos);
+
+STD_ReturnType lcd_8bit_intialize(const lcd_8bit_t *lcd);
+STD_ReturnType lcd_8bit_send_command(const lcd_8bit_t *lcd, uint8_t command);
+STD_ReturnType lcd_8bit_send_char_data(const lcd_8bit_t *lcd, uint8_t data);
+STD_ReturnType lcd_8bit_send_char_data_pos(const lcd_8bit_t *lcd,uint8_t row, uint8_t column, uint8_t data);
+STD_ReturnType lcd_8bit_send_string(const lcd_8bit_t *lcd, uint8_t *str);
+STD_ReturnType lcd_8bit_send_string_pos(const lcd_8bit_t *lcd, uint8_t row, uint8_t column, uint8_t *str);
+STD_ReturnType lcd_8bit_send_custom_char(const lcd_8bit_t *lcd, uint8_t row, uint8_t column,
+                                         const uint8_t _chr[], uint8_t mem_pos);
+
+STD_ReturnType convert_uint8_to_string(uint8_t value, uint8_t *str);
+STD_ReturnType convert_uint16_to_string(uint16_t value, uint8_t *str);
+STD_ReturnType convert_uint32_to_string(uint32_t value, uint8_t *str);
+# 13 "./ECU_Layer/ecu_layer_init.h" 2
+# 1 "./ECU_Layer/7SEG/ecu_7seg.h" 1
+# 14 "./ECU_Layer/7SEG/ecu_7seg.h"
+# 1 "./ECU_Layer/7SEG/ecu_7seg_cfg.h" 1
+# 15 "./ECU_Layer/7SEG/ecu_7seg.h" 2
+
+
+
+
+
+
+
+typedef enum{
+    SEG_COMMON_ANODE,
+    SEG_COMMON_CATHODE
+}segType_t;
+
+typedef struct {
+    pin_config_t segPins[4];
+    segType_t segType;
+}segment_t;
+
+
+STD_ReturnType segInit(const segment_t *seg);
+STD_ReturnType segWrite(const segment_t *seg,uint8_t num);
+# 14 "./ECU_Layer/ecu_layer_init.h" 2
+# 1 "./ECU_Layer/BUTTON/ecu_button.h" 1
+# 13 "./ECU_Layer/BUTTON/ecu_button.h"
+# 1 "./ECU_Layer/BUTTON/ecu_button_cfg.h" 1
+# 14 "./ECU_Layer/BUTTON/ecu_button.h" 2
+
+
+
+
+
+
+
+
+typedef enum{
+    BUTTON_PRESSED,
+    BUTTON_RELEASED
+}btn_state_t;
+
+typedef enum{
+    BUTTON_ACTIVE_LOW,
+    BUTTON_ACTIVE_HIGH
+}btn_activity_t;
+
+typedef struct {
+    pin_config_t btn_pin;
+    btn_state_t state;
+    btn_activity_t button_connection ;
+}button_t;
+
+
+STD_ReturnType btn_init(const button_t *);
+STD_ReturnType btn_read_state(const button_t *,btn_state_t *btn_state);
+# 15 "./ECU_Layer/ecu_layer_init.h" 2
+# 1 "./ECU_Layer/DC_MOTOR/ecu_dc_motor.h" 1
+# 14 "./ECU_Layer/DC_MOTOR/ecu_dc_motor.h"
+# 1 "./ECU_Layer/DC_MOTOR/ecu_dc_motor_cfg.h" 1
+# 15 "./ECU_Layer/DC_MOTOR/ecu_dc_motor.h" 2
+
+
+
+
+
+
+typedef struct {
+    pin_config_t dcMotor_pins[2];
+}dcMotor_t;
+
+STD_ReturnType dcMotor_intit(const dcMotor_t* motor);
+STD_ReturnType dcMotor_Move_right(const dcMotor_t* motor);
+STD_ReturnType dcMotor_Move_left(const dcMotor_t* motor);
+STD_ReturnType dcMotor_Stop(const dcMotor_t* motor);
+# 16 "./ECU_Layer/ecu_layer_init.h" 2
+# 1 "./ECU_Layer/KEYPAD/ecu_keypad.h" 1
+# 14 "./ECU_Layer/KEYPAD/ecu_keypad.h"
+# 1 "./ECU_Layer/KEYPAD/ecu_keypad_cfg.h" 1
+# 15 "./ECU_Layer/KEYPAD/ecu_keypad.h" 2
+
+
+
+
+
+
+
+typedef enum{
+    KEYPAD_PULLUP,
+    KEYPAD_PULLDOWN
+}keypad_connection_t;
+
+typedef struct{
+    pin_config_t rowPins[4];
+    pin_config_t colPins[6];
+    keypad_connection_t conn;
+    uint8_t (*keypadMatrix)[4][6];
+
+
+}keypad_t;
+
+
+STD_ReturnType keypadInit(const keypad_t * pad);
+STD_ReturnType keypadReadValue(const keypad_t * pad,uint8_t *val);
+# 17 "./ECU_Layer/ecu_layer_init.h" 2
+# 1 "./ECU_Layer/RELAY/ecu_relay.h" 1
+# 12 "./ECU_Layer/RELAY/ecu_relay.h"
+# 1 "./ECU_Layer/RELAY/ecu_relay_cfg.h" 1
+# 13 "./ECU_Layer/RELAY/ecu_relay.h" 2
+
+
+
+
+
+
+
+
+typedef struct {
+    uint8_t port:4;
+    uint8_t pin:3;
+    uint8_t state:1;
+}relay_t;
+
+
+STD_ReturnType relayInit(const relay_t * relay);
+STD_ReturnType relayON(const relay_t * relay);
+STD_ReturnType relayOFF(const relay_t * relay);
+# 18 "./ECU_Layer/ecu_layer_init.h" 2
 # 13 "./Application.h" 2
 # 1 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h" 1
 # 12 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h"
@@ -4825,7 +4995,8 @@ typedef struct {
 } Interrupt_INTx_t;
 
 typedef struct {
-    void(*callback_function)(void);
+    void(*callback_function_HIGH)(void);
+    void(*callback_function_LOW)(void);
     pin_config_t pin;
     interrupt_priority_cfg priority;
 } Interrupt_RBx_t;
@@ -4840,71 +5011,13 @@ STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj);
 # 14 "./Application.h" 2
 # 11 "Application.c" 2
 
-led_t led = {
-    .port_name = PORTC_INDEX, .pin = GPIO_PIN0, .led_status = GPIO_LOW };
 
-led_t led2 = {
-    .port_name = PORTC_INDEX, .pin = GPIO_PIN1, .led_status = GPIO_LOW};
 
-led_t led3 = {
-    .port_name = PORTC_INDEX, .pin = GPIO_PIN2, .led_status = GPIO_LOW};
 
-void app_isr()
-{
-    _delay((unsigned long)((500)*(16000000/4000.0)));
-    led_toggle(&led);
-}
+int main(int argc, char **argv) {
 
-void app_isr2()
-{
 
-    led_toggle(&led2);
-}
-
-void app_isr3()
-{
-    led_toggle(&led3);
-}
-
-Interrupt_INTx_t int0 = {
-    .pin.port = PORTB_INDEX,
-    .pin.pin = GPIO_PIN0,
-    .pin.direction = GPIO_DIRECTION_INPUT,
-    .src = EXT_INT0,
-    .edge = RISNIG_EDGE,
-    .priority = HIGH_PRIORITY,
-    .callback_function = app_isr};
-
-Interrupt_INTx_t int1 = {
-    .pin.port = PORTB_INDEX,
-    .pin.pin = GPIO_PIN1,
-    .pin.direction = GPIO_DIRECTION_INPUT,
-    .src = EXT_INT1,
-    .edge = FALLING_EDGE,
-    .priority = HIGH_PRIORITY,
-    .callback_function = app_isr2};
-
-Interrupt_INTx_t int2 = {
-    .pin.port = PORTB_INDEX,
-    .pin.pin = GPIO_PIN2,
-    .pin.direction = GPIO_DIRECTION_INPUT,
-    .src = EXT_INT2,
-    .edge = FALLING_EDGE,
-    .priority = HIGH_PRIORITY,
-    .callback_function = app_isr3};
-
-int main(int argc, char **argv)
-{
-
-    STD_ReturnType ret = (STD_ReturnType) 0x01;
-    ret = Interrupt_INTx_Init(&int0);
-    ret = Interrupt_INTx_Init(&int1);
-    ret = Interrupt_INTx_Init(&int2);
-    ret = led_init(&led);
-    ret = led_init(&led2);
-    ret = led_init(&led3);
-    while (1)
-    {
+    while (1) {
     }
 
     return (0);

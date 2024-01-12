@@ -4725,18 +4725,21 @@ typedef enum {
 
 # 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../GPIO/hal_gpio.h" 1
 # 26 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../GPIO/hal_gpio.h"
-typedef enum {
-    GPIO_LOW =0,
+typedef enum
+{
+    GPIO_LOW = 0,
     GPIO_HIGH
-}logic_t;
+} logic_t;
 
-typedef enum {
-    GPIO_DIRECTION_OUTPUT=0,
+typedef enum
+{
+    GPIO_DIRECTION_OUTPUT = 0,
     GPIO_DIRECTION_INPUT
-}direction_t;
+} direction_t;
 
-typedef enum {
-    GPIO_PIN0=0,
+typedef enum
+{
+    GPIO_PIN0 = 0,
     GPIO_PIN1,
     GPIO_PIN2,
     GPIO_PIN3,
@@ -4744,40 +4747,40 @@ typedef enum {
     GPIO_PIN5,
     GPIO_PIN6,
     GPIO_PIN7
-}pin_index_t;
+} pin_index_t;
 
-typedef enum {
-    PORTA_INDEX=0,
+typedef enum
+{
+    PORTA_INDEX = 0,
     PORTB_INDEX,
     PORTC_INDEX,
     PORTD_INDEX,
     PORTE_INDEX
-}port_index_t;
+} port_index_t;
 
-typedef struct {
-    uint8_t port :3;
-    uint8_t pin :3;
-    uint8_t direction :1;
-    uint8_t logic :1;
+typedef struct
+{
+    uint8_t port : 3;
+    uint8_t pin : 3;
+    uint8_t direction : 1;
+    uint8_t logic : 1;
 
-}pin_config_t;
-
-
+} pin_config_t;
 
 
 
 STD_ReturnType gpio_pin_direction_initialize(const pin_config_t *pin_config);
 STD_ReturnType gpio_pin_initialize(const pin_config_t *pin_config);
-STD_ReturnType gpio_pin_get_direction_status(const pin_config_t *pin_config,direction_t *direction_status );
-STD_ReturnType gpio_pin_write_logic( pin_config_t *pin_config,logic_t logic);
-STD_ReturnType gpio_pin_read_logic(const pin_config_t *pin_config,logic_t* logic);
-STD_ReturnType gpio_pin_toggle_logic( pin_config_t *pin_config);
+STD_ReturnType gpio_pin_get_direction_status(const pin_config_t *pin_config, direction_t *direction_status);
+STD_ReturnType gpio_pin_write_logic(pin_config_t *pin_config, logic_t logic);
+STD_ReturnType gpio_pin_read_logic(const pin_config_t *pin_config, logic_t *logic);
+STD_ReturnType gpio_pin_toggle_logic(pin_config_t *pin_config);
 
-STD_ReturnType gpio_port_direction_initialize(port_index_t port_num ,uint8_t direction);
-STD_ReturnType gpio_port_get_direction_status(port_index_t port_num ,uint8_t *direction_status );
-STD_ReturnType gpio_port_write_logic(port_index_t port_num ,uint8_t logic);
-STD_ReturnType gpio_port_read_logic(port_index_t port_num ,uint8_t* logic);
-STD_ReturnType gpio_port_toggle_logic(port_index_t port_num );
+STD_ReturnType gpio_port_direction_initialize(port_index_t port_num, uint8_t direction);
+STD_ReturnType gpio_port_get_direction_status(port_index_t port_num, uint8_t *direction_status);
+STD_ReturnType gpio_port_write_logic(port_index_t port_num, uint8_t logic);
+STD_ReturnType gpio_port_read_logic(port_index_t port_num, uint8_t *logic);
+STD_ReturnType gpio_port_toggle_logic(port_index_t port_num);
 # 13 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.h" 2
 # 74 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.h"
 typedef enum {
@@ -4800,7 +4803,8 @@ typedef struct {
 } Interrupt_INTx_t;
 
 typedef struct {
-    void(*callback_function)(void);
+    void(*callback_function_HIGH)(void);
+    void(*callback_function_LOW)(void);
     pin_config_t pin;
     interrupt_priority_cfg priority;
 } Interrupt_RBx_t;
@@ -4814,10 +4818,39 @@ STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj);
 STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj);
 # 7 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c" 2
 
+# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h" 1
+# 23 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h"
+void INT0_ISR(void);
+void INT1_ISR(void);
+void INT2_ISR(void);
+
+void RB4_ISR(uint8_t src);
+void RB5_ISR(uint8_t src);
+void RB6_ISR(uint8_t src);
+void RB7_ISR(uint8_t src);
+# 8 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c" 2
+
 
 static void (*INT0_CALBACK)(void) = ((void*)0);
 static void (*INT1_CALBACK)(void) = ((void*)0);
 static void (*INT2_CALBACK)(void) = ((void*)0);
+
+static void (*RB4_CallBack_HIGH) (void) = ((void*)0);
+static void (*RB5_CallBack_HIGH) (void) = ((void*)0);
+static void (*RB6_CallBack_HIGH) (void) = ((void*)0);
+static void (*RB7_CallBack_HIGH) (void) = ((void*)0);
+static void (*RB4_CallBack_LOW) (void) = ((void*)0);
+static void (*RB5_CallBack_LOW) (void) = ((void*)0);
+static void (*RB6_CallBack_LOW) (void) = ((void*)0);
+static void (*RB7_CallBack_LOW) (void) = ((void*)0);
+
+static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Edge_Init(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Pin_Init(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Priority_Init(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Clear_Flag(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_CallBack_Init(const Interrupt_INTx_t * obj);
 
 void INT0_ISR(void) {
 
@@ -4845,20 +4878,45 @@ void INT2_ISR(void) {
 
 }
 
+void RB4_ISR(uint8_t src) {
+    (INTCONbits.RBIF = 0);
+    if (src == 0)
+        if (RB4_CallBack_LOW)
+            RB4_CallBack_LOW();
+    if (src == 1)
+        if (RB4_CallBack_HIGH)
+            RB4_CallBack_HIGH();
+}
 
-static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Edge_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Pin_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Priority_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Clear_Flag(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_CallBack_Init(const Interrupt_INTx_t * obj);
+void RB5_ISR(uint8_t src) {
+    (INTCONbits.RBIF = 0);
+    if (src == 0)
+        if (RB5_CallBack_LOW)
+            RB5_CallBack_LOW();
+    if (src == 1)
+        if (RB5_CallBack_HIGH)
+            RB5_CallBack_HIGH();
+}
 
+void RB6_ISR(uint8_t src) {
+    (INTCONbits.RBIF = 0);
+    if (src == 0)
+        if (RB6_CallBack_LOW)
+            RB6_CallBack_LOW();
+    if (src == 1)
+        if (RB6_CallBack_HIGH)
+            RB6_CallBack_HIGH();
+}
 
-static STD_ReturnType interrupt_RBx_Enable(const Interrupt_RBx_t * obj);
-static STD_ReturnType interrupt_RBx_Disable(const Interrupt_RBx_t * obj);
-static STD_ReturnType interrupt_RBx_Pin_Init(const Interrupt_RBx_t * obj);
-static STD_ReturnType interrupt_RBx_Priority_Init(const Interrupt_RBx_t * obj);
+void RB7_ISR(uint8_t src) {
+    (INTCONbits.RBIF = 0);
+    if (src == 0)
+        if (RB7_CallBack_LOW)
+            RB7_CallBack_LOW();
+    if (src == 1)
+        if (RB7_CallBack_HIGH)
+            RB7_CallBack_HIGH();
+}
 
 STD_ReturnType Interrupt_INTx_Init(Interrupt_INTx_t * obj) {
     STD_ReturnType ret = (STD_ReturnType) 0x01;
@@ -4901,6 +4959,41 @@ STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj) {
         ret = (STD_ReturnType) 0x00;
     } else {
 
+        (INTCONbits.RBIE = 0);
+
+        (INTCONbits.RBIF = 0);
+# 153 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
+        (INTCONbits.GIE = 1);
+        (INTCONbits.PEIE = 1);
+
+
+        ret = gpio_pin_direction_initialize(&(obj->pin));
+
+        switch (obj->pin.pin) {
+            case GPIO_PIN4:
+                RB4_CallBack_HIGH = obj->callback_function_HIGH;
+                RB4_CallBack_LOW = obj->callback_function_LOW;
+                break;
+
+            case GPIO_PIN5:
+                RB5_CallBack_HIGH = obj->callback_function_HIGH;
+                RB5_CallBack_LOW = obj->callback_function_LOW;
+                break;
+
+            case GPIO_PIN6:
+                RB6_CallBack_HIGH = obj->callback_function_HIGH;
+                RB6_CallBack_LOW = obj->callback_function_LOW;
+                break;
+
+            case GPIO_PIN7:
+                RB7_CallBack_HIGH = obj->callback_function_HIGH;
+                RB7_CallBack_LOW = obj->callback_function_LOW;
+                break;
+            default: ret = (STD_ReturnType) 0x00;
+        }
+
+        (INTCONbits.RBIE = 1);
+        ret = (STD_ReturnType) 0x01;
     }
     return ret;
 }
@@ -4910,7 +5003,8 @@ STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj) {
     if (((void*)0) == obj) {
         ret = (STD_ReturnType) 0x00;
     } else {
-
+        (INTCONbits.RBIE = 0);
+        (INTCONbits.RBIF = 0);
     }
     return ret;
 }
@@ -4921,10 +5015,7 @@ static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj) {
         ret = (STD_ReturnType) 0x00;
     } else {
         ret = (STD_ReturnType) 0x01;
-
-
-
-
+# 215 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
         (INTCONbits.GIE = 1);
         (INTCONbits.PEIE = 1);
 
@@ -4953,6 +5044,10 @@ static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj) {
         ret = (STD_ReturnType) 0x00;
     } else {
         ret = (STD_ReturnType) 0x01;
+# 253 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
+        (INTCONbits.GIE = 0);
+        (INTCONbits.PEIE = 0);
+
         switch (obj->src) {
                 ret = (STD_ReturnType) 0x01;
             case EXT_INT0:
@@ -5024,7 +5119,7 @@ static STD_ReturnType interrupt_INTx_Pin_Init(const Interrupt_INTx_t * obj) {
     }
     return ret;
 }
-# 257 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
+# 366 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
 static STD_ReturnType interrupt_INTx_Clear_Flag(const Interrupt_INTx_t * obj) {
     STD_ReturnType ret = (STD_ReturnType) 0x01;
     if (((void*)0) == obj) {

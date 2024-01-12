@@ -4722,20 +4722,70 @@ typedef enum {
     HIGH_PRIORITY
 }interrupt_priority_cfg;
 # 13 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h" 2
-# 22 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h"
-void INT0_ISR();
-void INT1_ISR();
-void INT2_ISR();
+# 23 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h"
+void INT0_ISR(void);
+void INT1_ISR(void);
+void INT2_ISR(void);
+
+void RB4_ISR(uint8_t src);
+void RB5_ISR(uint8_t src);
+void RB6_ISR(uint8_t src);
+void RB7_ISR(uint8_t src);
 # 7 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c" 2
-# 27 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c"
+
+uint8_t RB4_Flag = 1;
+uint8_t RB5_Flag = 1;
+uint8_t RB6_Flag = 1;
+uint8_t RB7_Flag = 1;
+# 37 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c"
 void __attribute__((picinterrupt(("")))) InterruptManager() {
     if ((INTCONbits.INT0IE == 1) && (INTCONbits.INT0IF == 1)) {
         INT0_ISR();
-    } else if ((INTCON3bits.INT1E == 1) && (INTCON3bits.INT1IF == 1)) {
-        INT1_ISR();
-    } else if ((INTCON3bits.INT2IE == 1) && (INTCON3bits.INT2IF == 1)) {
-        INT2_ISR();
-    } else {
-
     }
+    if ((INTCON3bits.INT1E == 1) && (INTCON3bits.INT1IF == 1)) {
+        INT1_ISR();
+    }
+    if ((INTCON3bits.INT2IE == 1) && (INTCON3bits.INT2IF == 1)) {
+        INT2_ISR();
+    }
+
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB4 == 1) &&(RB4_Flag == 1)) {
+        RB4_Flag = 0;
+        RB4_ISR(1);
+    }
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB4 == 0) &&(RB4_Flag == 0)) {
+        RB4_Flag = 1;
+        RB4_ISR(0);
+    }
+
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB5 == 1) &&(RB5_Flag == 1)) {
+        RB5_Flag = 0;
+        RB5_ISR(1);
+    }
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB5 == 0) &&(RB5_Flag == 0)) {
+        RB5_Flag = 1;
+        RB5_ISR(0);
+    }
+
+
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB6 == 1) &&(RB6_Flag == 1)) {
+        RB6_Flag = 0;
+        RB6_ISR(1);
+    }
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB6 == 0) &&(RB6_Flag == 0)) {
+        RB6_Flag = 1;
+        RB6_ISR(0);
+    }
+
+
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB7 == 1) &&(RB7_Flag == 1)) {
+        RB7_Flag = 0;
+        RB7_ISR(1);
+    }
+    if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB7 == 0) &&(RB7_Flag == 0)) {
+        RB7_Flag = 1;
+        RB7_ISR(0);
+    }
+
+
 }

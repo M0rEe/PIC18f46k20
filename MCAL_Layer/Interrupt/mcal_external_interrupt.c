@@ -5,10 +5,28 @@
  * Created on January 7, 2024, 5:33 PM
  */
 #include "mcal_external_interrupt.h"
+#include "mcal_interrupt_manager.h"
 
 static void (*INT0_CALBACK)(void) = NULL;
 static void (*INT1_CALBACK)(void) = NULL;
 static void (*INT2_CALBACK)(void) = NULL;
+
+static void (*RB4_CallBack_HIGH) (void) = NULL;
+static void (*RB5_CallBack_HIGH) (void) = NULL;
+static void (*RB6_CallBack_HIGH) (void) = NULL;
+static void (*RB7_CallBack_HIGH) (void) = NULL;
+static void (*RB4_CallBack_LOW) (void) = NULL;
+static void (*RB5_CallBack_LOW) (void) = NULL;
+static void (*RB6_CallBack_LOW) (void) = NULL;
+static void (*RB7_CallBack_LOW) (void) = NULL;
+
+static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Edge_Init(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Pin_Init(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Priority_Init(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_Clear_Flag(const Interrupt_INTx_t * obj);
+static STD_ReturnType interrupt_INTx_CallBack_Init(const Interrupt_INTx_t * obj);
 
 void INT0_ISR(void) {
 
@@ -36,20 +54,45 @@ void INT2_ISR(void) {
 
 }
 
+void RB4_ISR(uint8_t src) {
+    EXT_RBx_CLEAR_FLAG();
+    if (src == 0)
+        if (RB4_CallBack_LOW)
+            RB4_CallBack_LOW();
+    if (src == 1)
+        if (RB4_CallBack_HIGH)
+            RB4_CallBack_HIGH();
+}
 
-static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Edge_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Pin_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Priority_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Clear_Flag(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_CallBack_Init(const Interrupt_INTx_t * obj);
+void RB5_ISR(uint8_t src) {
+    EXT_RBx_CLEAR_FLAG();
+    if (src == 0)
+        if (RB5_CallBack_LOW)
+            RB5_CallBack_LOW();
+    if (src == 1)
+        if (RB5_CallBack_HIGH)
+            RB5_CallBack_HIGH();
+}
 
+void RB6_ISR(uint8_t src) {
+    EXT_RBx_CLEAR_FLAG();
+    if (src == 0)
+        if (RB6_CallBack_LOW)
+            RB6_CallBack_LOW();
+    if (src == 1)
+        if (RB6_CallBack_HIGH)
+            RB6_CallBack_HIGH();
+}
 
-static STD_ReturnType interrupt_RBx_Enable(const Interrupt_RBx_t * obj);
-static STD_ReturnType interrupt_RBx_Disable(const Interrupt_RBx_t * obj);
-static STD_ReturnType interrupt_RBx_Pin_Init(const Interrupt_RBx_t * obj);
-static STD_ReturnType interrupt_RBx_Priority_Init(const Interrupt_RBx_t * obj);
+void RB7_ISR(uint8_t src) {
+    EXT_RBx_CLEAR_FLAG();
+    if (src == 0)
+        if (RB7_CallBack_LOW)
+            RB7_CallBack_LOW();
+    if (src == 1)
+        if (RB7_CallBack_HIGH)
+            RB7_CallBack_HIGH();
+}
 
 STD_ReturnType Interrupt_INTx_Init(Interrupt_INTx_t * obj) {
     STD_ReturnType ret = E_OK;
@@ -91,7 +134,53 @@ STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj) {
     if (NULL == obj) {
         ret = E_NOT_OK;
     } else {
+        /*Disable Module */
+        EXT_RBx_DISABLE();
+        /*Clear Flag*/
+        EXT_RBx_CLEAR_FLAG();
+        /*Init Interrupt regs*/
+#if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
+        INTERRUPT_PriorityLevelEnable();
+        INTERRUPT_GlobalInterruptHighEnable();
 
+        if (obj->priority == HIGH_PRIORITY) {
+            EXT_RBx_HIGH_PRIORITY_SET();
+        } else if (obj->priority == LOW_PRIORITY) {
+            EXT_RBx_LOW_PRIORITY_SET();
+            INTERRUPT_GlobalInterruptLowEnable();
+        }
+#else
+        INTERRUPT_GlobalInterruptEnable();
+        INTERRUPT_PeripherialInterruptEnable();
+#endif
+        /*RBx pin Init*/
+        ret = gpio_pin_direction_initialize(&(obj->pin));
+        /*Init CallBack Function*/
+        switch (obj->pin.pin) {
+            case GPIO_PIN4:
+                RB4_CallBack_HIGH = obj->callback_function_HIGH;
+                RB4_CallBack_LOW = obj->callback_function_LOW;
+                break;
+
+            case GPIO_PIN5:
+                RB5_CallBack_HIGH = obj->callback_function_HIGH;
+                RB5_CallBack_LOW = obj->callback_function_LOW;
+                break;
+
+            case GPIO_PIN6:
+                RB6_CallBack_HIGH = obj->callback_function_HIGH;
+                RB6_CallBack_LOW = obj->callback_function_LOW;
+                break;
+
+            case GPIO_PIN7:
+                RB7_CallBack_HIGH = obj->callback_function_HIGH;
+                RB7_CallBack_LOW = obj->callback_function_LOW;
+                break;
+            default: ret = E_NOT_OK;
+        }
+        /*Enable Module*/
+        EXT_RBx_ENABLE();
+        ret = E_OK;
     }
     return ret;
 }
@@ -101,7 +190,8 @@ STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj) {
     if (NULL == obj) {
         ret = E_NOT_OK;
     } else {
-
+        EXT_RBx_DISABLE();
+        EXT_RBx_CLEAR_FLAG();
     }
     return ret;
 }
@@ -113,12 +203,18 @@ static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj) {
     } else {
         ret = E_OK;
 
-        #if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
-        
-        #else
+#if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
+        INTERRUPT_PriorityLevelEnable();
+        INTERRUPT_GlobalInterruptHighEnable();
+        if (obj->priority == LOW_PRIORITY) {
+            INTERRUPT_GlobalInterruptLowEnable();
+        } else {
+            /*Nothing*/
+        }
+#else
         INTERRUPT_GlobalInterruptEnable();
         INTERRUPT_PeripherialInterruptEnable();
-        #endif
+#endif
         switch (obj->src) {
             case EXT_INT0:
                 EXT_INT0_INTERRUPT_ENABLE(); /* ENABLE the INT0 external interrupt */
@@ -144,6 +240,19 @@ static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj) {
         ret = E_NOT_OK;
     } else {
         ret = E_OK;
+#if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
+        INTERRUPT_PriorityLevelDisable();
+        if (obj->priority == HIGH_PRIORITY)
+            INTERRUPT_GlobalInterruptHighDisable();
+        else if (obj->priority == LOW_PRIORITY)
+            INTERRUPT_GlobalInterruptLowDisable();
+        else {
+            /*Nothing*/
+        }
+#else
+        INTERRUPT_GlobalInterruptDisable();
+        INTERRUPT_PeripherialInterruptDisable();
+#endif
         switch (obj->src) {
                 ret = E_OK;
             case EXT_INT0:

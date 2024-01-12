@@ -91,7 +91,8 @@ typedef struct {
 } Interrupt_INTx_t;
 
 typedef struct {
-    void(*callback_function)(void);
+    void(*callback_function_HIGH)(void);
+    void(*callback_function_LOW)(void);
     pin_config_t pin;
     interrupt_priority_cfg priority;
 } Interrupt_RBx_t;

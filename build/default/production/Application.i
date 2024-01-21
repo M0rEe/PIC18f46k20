@@ -4977,7 +4977,7 @@ typedef enum {
 # 74 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h"
 typedef enum {
     FALLING_EDGE = 0,
-    RISNIG_EDGE
+    RISING_EDGE
 } interrupt_INTx_edge;
 
 typedef enum {
@@ -5009,7 +5009,6 @@ STD_ReturnType Interrupt_INTx_DeInit(Interrupt_INTx_t * obj);
 STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj);
 STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj);
 # 14 "./Application.h" 2
-# 11 "Application.c" 2
 # 1 "./MCAL_Layer/EEPROM/hal_eeprom.h" 1
 # 11 "./MCAL_Layer/EEPROM/hal_eeprom.h"
 # 1 "./MCAL_Layer/EEPROM/../Interrupt/mcal_internal_interrupt.h" 1
@@ -5017,25 +5016,143 @@ STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj);
 # 41 "./MCAL_Layer/EEPROM/hal_eeprom.h"
 STD_ReturnType EEPROM_ReadByte(uint16_t address,uint8_t* retData);
 STD_ReturnType EEPROM_WriteByte(uint16_t address,uint8_t retData);
-# 12 "Application.c" 2
+# 15 "./Application.h" 2
+# 1 "./MCAL_Layer/ADC/hal_adc.h" 1
+# 11 "./MCAL_Layer/ADC/hal_adc.h"
+# 1 "./MCAL_Layer/ADC/hal_adc_cfg.h" 1
+# 11 "./MCAL_Layer/ADC/hal_adc.h" 2
+# 68 "./MCAL_Layer/ADC/hal_adc.h"
+typedef enum {
+    ADC_CHANNEL_AN0 = 0,
+    ADC_CHANNEL_AN1,
+    ADC_CHANNEL_AN2,
+    ADC_CHANNEL_AN3,
+    ADC_CHANNEL_AN4,
+    ADC_CHANNEL_AN5,
+    ADC_CHANNEL_AN6,
+    ADC_CHANNEL_AN7,
+    ADC_CHANNEL_AN8,
+    ADC_CHANNEL_AN9,
+    ADC_CHANNEL_AN10,
+    ADC_CHANNEL_AN11,
+    ADC_CHANNEL_AN12
+} ADC_CHANNELS_SELECT_t;
 
-led_t led1 = {
-    .port_name = PORTC_INDEX, .led_status = LED_OFF, .pin = GPIO_PIN0
+typedef enum {
+    ADC_0TAD = 0,
+    ADC_2TAD,
+    ADC_4TAD,
+    ADC_6TAD,
+    ADC_8TAD,
+    ADC_12TAD,
+    ADC_16TAD,
+    ADC_20TAD,
+} ADC_ACQ_TIME_t;
+
+typedef enum {
+    FoscBy2 = 0,
+    FoscBy8,
+    FoscBy32,
+    Frc,
+    FoscBy4,
+    FoscBy16,
+    FoscBy64,
+
+} ADC_CONVERSION_CLOCK_t;
+
+typedef struct {
+
+    void (*ADC_CallBack)(void);
+    interrupt_priority_cfg priority;
+
+    ADC_ACQ_TIME_t aqcTime;
+    ADC_CONVERSION_CLOCK_t clk;
+    ADC_CHANNELS_SELECT_t ch;
+    uint8_t ADC_LR_ADJUST : 1;
+    uint8_t ADC_Vref : 1;
+    uint8_t Reserved : 6;
+} ADC_conf_t;
+
+
+STD_ReturnType ADC_INIT(const ADC_conf_t * obj);
+STD_ReturnType ADC_DEINIT(const ADC_conf_t * obj);
+
+STD_ReturnType ADC_SelectChannnel( ADC_conf_t * obj, ADC_CHANNELS_SELECT_t channel);
+STD_ReturnType ADC_StartConversion(const ADC_conf_t * obj);
+STD_ReturnType ADC_IsConversionDone(const ADC_conf_t * obj, uint8_t * state);
+STD_ReturnType ADC_GetConversionRes(const ADC_conf_t * obj, uint16_t* res);
+STD_ReturnType ADC_GetResFrom(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel ,uint16_t* res);
+STD_ReturnType ADC_GetFrom_NON_BLOCKING(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel );
+# 16 "./Application.h" 2
+# 11 "Application.c" 2
+
+void adisr(void);
+
+lcd_4bit_t lcd_1 = {
+ .rs.port = PORTC_INDEX,
+ .rs.pin = GPIO_PIN0,
+ .rs.direction = GPIO_DIRECTION_OUTPUT,
+ .rs.logic = GPIO_LOW,
+ .en.port = PORTC_INDEX,
+ .en.pin = GPIO_PIN1,
+ .en.direction = GPIO_DIRECTION_OUTPUT,
+ .en.logic = GPIO_LOW,
+ .data_pin[0].port = PORTC_INDEX,
+ .data_pin[0].pin = GPIO_PIN2,
+ .data_pin[0].direction = GPIO_DIRECTION_OUTPUT,
+ .data_pin[0].logic = GPIO_LOW,
+ .data_pin[1].port = PORTC_INDEX,
+ .data_pin[1].pin = GPIO_PIN3,
+ .data_pin[1].direction = GPIO_DIRECTION_OUTPUT,
+ .data_pin[1].logic = GPIO_LOW,
+ .data_pin[2].port = PORTC_INDEX,
+ .data_pin[2].pin = GPIO_PIN4,
+ .data_pin[2].direction = GPIO_DIRECTION_OUTPUT,
+ .data_pin[2].logic = GPIO_LOW,
+ .data_pin[3].port = PORTC_INDEX,
+ .data_pin[3].pin = GPIO_PIN5,
+ .data_pin[3].direction = GPIO_DIRECTION_OUTPUT,
+ .data_pin[3].logic = GPIO_LOW
 };
-uint8_t eeprom_currentval = 0;
-uint8_t eeprom_val = 0;
+ADC_conf_t ad1 = {
+ .ADC_CallBack = adisr,
+ .ADC_LR_ADJUST = 0x01U,
+ .ADC_Vref = 0x00U,
+ .aqcTime = ADC_12TAD,
+ .ch = ADC_CHANNEL_AN0,
+ .clk = FoscBy16
+};
 
-int main(int argc, char **argv) {
+uint16_t res1 = 0;
+uint8_t flag = 0;
 
-    EEPROM_WriteByte(0x110, 0x55);
-    led_init(&led1);
-    while (1) {
-        EEPROM_WriteByte(0x110, eeprom_currentval++);
-        _delay((unsigned long)((1000)*(16000000/4000.0)));
-        EEPROM_ReadByte(0x110,&eeprom_val);
-        if (eeprom_val > 5)
-            led_on(&led1);
-    }
+void adisr(void)
+{
+ ADC_GetConversionRes(&ad1, &res1);
+ flag++;
+}
+uint8_t chr[] = {
+ 0x00,
+ 0x04,
+ 0x0C,
+ 0x14,
+ 0x14,
+ 0x1F,
+ 0x04,
+ 0x00
+};
 
-    return (0);
+int main(int argc, char **argv)
+{
+ ADC_INIT(&ad1);
+
+ lcd_4bit_intialize(&lcd_1);
+
+ lcd_4bit_send_string_pos(&lcd_1, 1, 7, "ADC TEST");
+ _delay((unsigned long)((2000)*(16000000/4000.0)));
+ while (1) {
+  ADC_GetFrom_NON_BLOCKING(&ad1, ADC_CHANNEL_AN0);
+ }
+
+ return(0);
 }

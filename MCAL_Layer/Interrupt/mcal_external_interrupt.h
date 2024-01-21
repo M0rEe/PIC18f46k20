@@ -73,7 +73,7 @@
 /*  Section : Data Type Declarations    */
 typedef enum {
     FALLING_EDGE = 0,
-    RISNIG_EDGE
+    RISING_EDGE
 } interrupt_INTx_edge;
 
 typedef enum {

@@ -8,25 +8,64 @@
 /* testing commit*/
 
 #include "Application.h"
-#include "MCAL_Layer/EEPROM/hal_eeprom.h"
 
-led_t led1 = {
-    .port_name = PORTC_INDEX, .led_status = LED_OFF, .pin = GPIO_PIN0
+void adisr(void);
+
+lcd_4bit_t lcd_1 = {
+	.rs.port = PORTC_INDEX,
+	.rs.pin = GPIO_PIN0,
+	.rs.direction = GPIO_DIRECTION_OUTPUT,
+	.rs.logic = GPIO_LOW,
+	.en.port = PORTC_INDEX,
+	.en.pin = GPIO_PIN1,
+	.en.direction = GPIO_DIRECTION_OUTPUT,
+	.en.logic = GPIO_LOW,
+	.data_pin[0].port = PORTC_INDEX,
+	.data_pin[0].pin = GPIO_PIN2,
+	.data_pin[0].direction = GPIO_DIRECTION_OUTPUT,
+	.data_pin[0].logic = GPIO_LOW,
+	.data_pin[1].port = PORTC_INDEX,
+	.data_pin[1].pin = GPIO_PIN3,
+	.data_pin[1].direction = GPIO_DIRECTION_OUTPUT,
+	.data_pin[1].logic = GPIO_LOW,
+	.data_pin[2].port = PORTC_INDEX,
+	.data_pin[2].pin = GPIO_PIN4,
+	.data_pin[2].direction = GPIO_DIRECTION_OUTPUT,
+	.data_pin[2].logic = GPIO_LOW,
+	.data_pin[3].port = PORTC_INDEX,
+	.data_pin[3].pin = GPIO_PIN5,
+	.data_pin[3].direction = GPIO_DIRECTION_OUTPUT,
+	.data_pin[3].logic = GPIO_LOW
 };
-uint8_t eeprom_currentval = 0;
-uint8_t eeprom_val = 0;
+ADC_conf_t ad1 = {
+	.ADC_CallBack = adisr,
+	.ADC_LR_ADJUST = RIGHT_ADJUST,
+	.ADC_Vref = ADC_VREF_DISABLE,
+	.aqcTime = ADC_12TAD,
+	.ch = ADC_CHANNEL_AN0,
+	.clk = FoscBy16
+};
 
-int main(int argc, char **argv) {
+uint16_t res1 = 0;
+uint8_t flag = 0;
 
-    EEPROM_WriteByte(0x110, 0x55);
-    led_init(&led1);
-    while (1) {
-        EEPROM_WriteByte(0x110, eeprom_currentval++);
-        __delay_ms(1000);
-        EEPROM_ReadByte(0x110,&eeprom_val);
-        if (eeprom_val > 5)
-            led_on(&led1);
-    }
+void adisr(void)
+{
+	ADC_GetConversionRes(&ad1, &res1);
+	flag++;
+}
 
-    return (EXIT_SUCCESS);
+
+int main(int argc, char **argv)
+{
+	ADC_INIT(&ad1);
+	//uint8_t state = 0;
+	lcd_4bit_intialize(&lcd_1);
+	lcd_4bit_send_string_pos(&lcd_1, 1, 7, "ADC TEST");
+	__delay_ms(2000);
+	while (1) {
+		ADC_GetFrom_NON_BLOCKING(&ad1, ADC_CHANNEL_AN0);
+	}
+
+	return(EXIT_SUCCESS);
 }

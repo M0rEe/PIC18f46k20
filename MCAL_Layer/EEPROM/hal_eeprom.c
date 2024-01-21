@@ -47,7 +47,7 @@ STD_ReturnType EEPROM_ReadByte(uint16_t address, uint8_t* retData) {
 STD_ReturnType EEPROM_WriteByte(uint16_t address, uint8_t retData) {
     STD_ReturnType ret = E_OK;
 
-    if (NULL == retData) {
+    if ( (retData > 255) || (retData < 0)) {
         ret = E_NOT_OK;
     } else {
         /*Get Interrupt states*/

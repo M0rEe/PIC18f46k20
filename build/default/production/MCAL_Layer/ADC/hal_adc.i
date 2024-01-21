@@ -1,4 +1,4 @@
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
+# 1 "MCAL_Layer/ADC/hal_adc.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,17 +6,18 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c" 2
+# 1 "MCAL_Layer/ADC/hal_adc.c" 2
 
 
 
 
 
 
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.h" 1
-# 12 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.h"
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 1
-# 14 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_cfg.h"
+# 1 "MCAL_Layer/ADC/hal_adc.h" 1
+# 11 "MCAL_Layer/ADC/hal_adc.h"
+# 1 "MCAL_Layer/ADC/hal_adc_cfg.h" 1
+# 11 "MCAL_Layer/ADC/hal_adc.h" 2
+
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\proc\\../proc/pic18f4620.h" 1 3
 # 44 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\proc\\../proc/pic18f4620.h" 3
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\__at.h" 1 3
@@ -4229,12 +4230,12 @@ extern volatile __bit nWR __attribute__((address(0x7C21)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x7E3A)));
-# 14 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 2
+# 12 "MCAL_Layer/ADC/hal_adc.h" 2
 
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../mcal_std_types.h" 1
-# 12 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../mcal_std_types.h"
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../std_libraries.h" 1
-# 12 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../std_libraries.h"
+# 1 "MCAL_Layer/ADC/../mcal_std_types.h" 1
+# 12 "MCAL_Layer/ADC/../mcal_std_types.h"
+# 1 "MCAL_Layer/ADC/../std_libraries.h" 1
+# 12 "MCAL_Layer/ADC/../std_libraries.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdio.h" 1 3
 
 
@@ -4405,7 +4406,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 13 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../std_libraries.h" 2
+# 13 "MCAL_Layer/ADC/../std_libraries.h" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdlib.h" 1 3
 # 21 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdlib.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4483,7 +4484,7 @@ typedef struct { unsigned int quot, rem; } udiv_t;
 typedef struct { unsigned long quot, rem; } uldiv_t;
 udiv_t udiv (unsigned int, unsigned int);
 uldiv_t uldiv (unsigned long, unsigned long);
-# 14 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../std_libraries.h" 2
+# 14 "MCAL_Layer/ADC/../std_libraries.h" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\string.h" 1 3
 # 25 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\string.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4541,10 +4542,10 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 15 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../std_libraries.h" 2
-# 13 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../mcal_std_types.h" 2
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../compiler.h" 1
-# 13 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../compiler.h"
+# 15 "MCAL_Layer/ADC/../std_libraries.h" 2
+# 13 "MCAL_Layer/ADC/../mcal_std_types.h" 2
+# 1 "MCAL_Layer/ADC/../compiler.h" 1
+# 13 "MCAL_Layer/ADC/../compiler.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4705,26 +4706,31 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\xc.h" 2 3
-# 14 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../compiler.h" 2
-# 14 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../mcal_std_types.h" 2
-# 30 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../mcal_std_types.h"
+# 14 "MCAL_Layer/ADC/../compiler.h" 2
+# 14 "MCAL_Layer/ADC/../mcal_std_types.h" 2
+# 30 "MCAL_Layer/ADC/../mcal_std_types.h"
 typedef uint8_t STD_ReturnType ;
-# 15 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 2
+# 13 "MCAL_Layer/ADC/hal_adc.h" 2
 
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../device_config.h" 1
-# 16 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 2
+# 1 "MCAL_Layer/ADC/../Interrupt/mcal_internal_interrupt.h" 1
+# 13 "MCAL_Layer/ADC/../Interrupt/mcal_internal_interrupt.h"
+# 1 "MCAL_Layer/ADC/../Interrupt/mcal_interrupt_cfg.h" 1
+# 16 "MCAL_Layer/ADC/../Interrupt/mcal_interrupt_cfg.h"
+# 1 "MCAL_Layer/ADC/../Interrupt/../device_config.h" 1
+# 16 "MCAL_Layer/ADC/../Interrupt/mcal_interrupt_cfg.h" 2
 
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_gen_cfg.h" 1
-# 17 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 2
-# 52 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_cfg.h"
+# 1 "MCAL_Layer/ADC/../Interrupt/mcal_interrupt_gen_cfg.h" 1
+# 17 "MCAL_Layer/ADC/../Interrupt/mcal_interrupt_cfg.h" 2
+# 52 "MCAL_Layer/ADC/../Interrupt/mcal_interrupt_cfg.h"
 typedef enum {
     LOW_PRIORITY=0,
     HIGH_PRIORITY
 }interrupt_priority_cfg;
-# 12 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.h" 2
+# 13 "MCAL_Layer/ADC/../Interrupt/mcal_internal_interrupt.h" 2
+# 14 "MCAL_Layer/ADC/hal_adc.h" 2
 
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../GPIO/hal_gpio.h" 1
-# 26 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/../GPIO/hal_gpio.h"
+# 1 "MCAL_Layer/ADC/../GPIO/hal_gpio.h" 1
+# 26 "MCAL_Layer/ADC/../GPIO/hal_gpio.h"
 typedef enum
 {
     GPIO_LOW = 0,
@@ -4781,419 +4787,283 @@ STD_ReturnType gpio_port_get_direction_status(port_index_t port_num, uint8_t *di
 STD_ReturnType gpio_port_write_logic(port_index_t port_num, uint8_t logic);
 STD_ReturnType gpio_port_read_logic(port_index_t port_num, uint8_t *logic);
 STD_ReturnType gpio_port_toggle_logic(port_index_t port_num);
-# 13 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.h" 2
-# 74 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.h"
+# 15 "MCAL_Layer/ADC/hal_adc.h" 2
+# 68 "MCAL_Layer/ADC/hal_adc.h"
 typedef enum {
-    FALLING_EDGE = 0,
-    RISING_EDGE
-} interrupt_INTx_edge;
+    ADC_CHANNEL_AN0 = 0,
+    ADC_CHANNEL_AN1,
+    ADC_CHANNEL_AN2,
+    ADC_CHANNEL_AN3,
+    ADC_CHANNEL_AN4,
+    ADC_CHANNEL_AN5,
+    ADC_CHANNEL_AN6,
+    ADC_CHANNEL_AN7,
+    ADC_CHANNEL_AN8,
+    ADC_CHANNEL_AN9,
+    ADC_CHANNEL_AN10,
+    ADC_CHANNEL_AN11,
+    ADC_CHANNEL_AN12
+} ADC_CHANNELS_SELECT_t;
 
 typedef enum {
-    EXT_INT0 = 0,
-    EXT_INT1,
-    EXT_INT2
-} interrupt_INTx_src;
+    ADC_0TAD = 0,
+    ADC_2TAD,
+    ADC_4TAD,
+    ADC_6TAD,
+    ADC_8TAD,
+    ADC_12TAD,
+    ADC_16TAD,
+    ADC_20TAD,
+} ADC_ACQ_TIME_t;
+
+typedef enum {
+    FoscBy2 = 0,
+    FoscBy8,
+    FoscBy32,
+    Frc,
+    FoscBy4,
+    FoscBy16,
+    FoscBy64,
+
+} ADC_CONVERSION_CLOCK_t;
 
 typedef struct {
-    void(*callback_function)(void);
-    pin_config_t pin;
-    interrupt_INTx_edge edge;
-    interrupt_INTx_src src;
+
+    void (*ADC_CallBack)(void);
     interrupt_priority_cfg priority;
-} Interrupt_INTx_t;
 
-typedef struct {
-    void(*callback_function_HIGH)(void);
-    void(*callback_function_LOW)(void);
-    pin_config_t pin;
-    interrupt_priority_cfg priority;
-} Interrupt_RBx_t;
-
-
-
-STD_ReturnType Interrupt_INTx_Init(Interrupt_INTx_t * obj);
-STD_ReturnType Interrupt_INTx_DeInit(Interrupt_INTx_t * obj);
-
-STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj);
-STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj);
-# 7 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c" 2
-
-# 1 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h" 1
-# 23 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h"
-void INT0_ISR(void);
-void INT1_ISR(void);
-void INT2_ISR(void);
-
-void RB4_ISR(uint8_t src);
-void RB5_ISR(uint8_t src);
-void RB6_ISR(uint8_t src);
-void RB7_ISR(uint8_t src);
-
-void ADC_ISR(void);
-# 8 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c" 2
+    ADC_ACQ_TIME_t aqcTime;
+    ADC_CONVERSION_CLOCK_t clk;
+    ADC_CHANNELS_SELECT_t ch;
+    uint8_t ADC_LR_ADJUST : 1;
+    uint8_t ADC_Vref : 1;
+    uint8_t Reserved : 6;
+} ADC_conf_t;
 
 
-static void (*INT0_CALBACK)(void) = ((void*)0);
-static void (*INT1_CALBACK)(void) = ((void*)0);
-static void (*INT2_CALBACK)(void) = ((void*)0);
+STD_ReturnType ADC_INIT(const ADC_conf_t * obj);
+STD_ReturnType ADC_DEINIT(const ADC_conf_t * obj);
 
-static void (*RB4_CallBack_HIGH) (void) = ((void*)0);
-static void (*RB5_CallBack_HIGH) (void) = ((void*)0);
-static void (*RB6_CallBack_HIGH) (void) = ((void*)0);
-static void (*RB7_CallBack_HIGH) (void) = ((void*)0);
-static void (*RB4_CallBack_LOW) (void) = ((void*)0);
-static void (*RB5_CallBack_LOW) (void) = ((void*)0);
-static void (*RB6_CallBack_LOW) (void) = ((void*)0);
-static void (*RB7_CallBack_LOW) (void) = ((void*)0);
+STD_ReturnType ADC_SelectChannnel( ADC_conf_t * obj, ADC_CHANNELS_SELECT_t channel);
+STD_ReturnType ADC_StartConversion(const ADC_conf_t * obj);
+STD_ReturnType ADC_IsConversionDone(const ADC_conf_t * obj, uint8_t * state);
+STD_ReturnType ADC_GetConversionRes(const ADC_conf_t * obj, uint16_t* res);
+STD_ReturnType ADC_GetResFrom(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel ,uint16_t* res);
+STD_ReturnType ADC_GetFrom_NON_BLOCKING(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel );
+# 7 "MCAL_Layer/ADC/hal_adc.c" 2
 
-static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Edge_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Pin_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Priority_Init(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_Clear_Flag(const Interrupt_INTx_t * obj);
-static STD_ReturnType interrupt_INTx_CallBack_Init(const Interrupt_INTx_t * obj);
+static __attribute__((inline)) void ADC_CHANNEL_PIN_CONFIGURE(ADC_conf_t * obj);
+static __attribute__((inline)) void ADC_RESULT_ADJUST(ADC_conf_t * obj);
+static __attribute__((inline)) void ADC_VOLTAGE_REFRECE_CONFIGURE(ADC_conf_t * obj);
 
-void INT0_ISR(void)
-{
 
- (INTCONbits.INT0IF = 0);
 
- if (INT0_CALBACK)
-  INT0_CALBACK();
-}
+static void (*ADC_CALLBACK)(void) = ((void*)0);
 
-void INT1_ISR(void)
-{
 
- (INTCON3bits.INT1F = 0);
 
- if (INT1_CALBACK)
-  INT1_CALBACK();
-
-}
-
-void INT2_ISR(void)
-{
-
- (INTCON3bits.INT2F = 0);
-
- if (INT2_CALBACK)
-  INT2_CALBACK();
-
-}
-
-void RB4_ISR(uint8_t src)
-{
- (INTCONbits.RBIF = 0);
- if (src == 0)
-  if (RB4_CallBack_LOW)
-   RB4_CallBack_LOW();
- if (src == 1)
-  if (RB4_CallBack_HIGH)
-   RB4_CallBack_HIGH();
-}
-
-void RB5_ISR(uint8_t src)
-{
- (INTCONbits.RBIF = 0);
- if (src == 0)
-  if (RB5_CallBack_LOW)
-   RB5_CallBack_LOW();
- if (src == 1)
-  if (RB5_CallBack_HIGH)
-   RB5_CallBack_HIGH();
-}
-
-void RB6_ISR(uint8_t src)
-{
- (INTCONbits.RBIF = 0);
- if (src == 0)
-  if (RB6_CallBack_LOW)
-   RB6_CallBack_LOW();
- if (src == 1)
-  if (RB6_CallBack_HIGH)
-   RB6_CallBack_HIGH();
-}
-
-void RB7_ISR(uint8_t src)
-{
- (INTCONbits.RBIF = 0);
- if (src == 0)
-  if (RB7_CallBack_LOW)
-   RB7_CallBack_LOW();
- if (src == 1)
-  if (RB7_CallBack_HIGH)
-   RB7_CallBack_HIGH();
-}
-
-STD_ReturnType Interrupt_INTx_Init(Interrupt_INTx_t * obj)
+STD_ReturnType ADC_INIT(const ADC_conf_t * obj)
 {
  STD_ReturnType ret = (STD_ReturnType) 0x01;
+
  if (((void*)0) == obj) {
   ret = (STD_ReturnType) 0x00;
  } else {
 
-  ret = interrupt_INTx_Disable(obj);
-
-  ret = interrupt_INTx_Clear_Flag(obj);
-
-  ret = interrupt_INTx_Edge_Init(obj);
+  (ADCON0bits.ADON = 0);
 
 
+  ADCON2bits.ACQT = obj->aqcTime;
+
+  ADCON2bits.ADCS = obj->clk;
+
+  ADCON0bits.CHS = obj->ch;
+  ADC_CHANNEL_PIN_CONFIGURE(obj);
 
 
 
-  ret = interrupt_INTx_Pin_Init(obj);
-
-  ret = interrupt_INTx_CallBack_Init(obj);
-
-  ret = interrupt_INTx_Enable(obj);
- }
- return ret;
-}
-
-STD_ReturnType Interrupt_INTx_DeInit(Interrupt_INTx_t * obj)
-{
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if (((void*)0) == obj) {
-  ret = (STD_ReturnType) 0x00;
- } else {
-  ret = interrupt_INTx_Disable(obj);
- }
- return ret;
-}
-
-STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj)
-{
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if (((void*)0) == obj) {
-  ret = (STD_ReturnType) 0x00;
- } else {
-
-  (INTCONbits.RBIE = 0);
-
-  (INTCONbits.RBIF = 0);
-# 163 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
+  (PIE1bits.ADIE = 1);
+  (PIR1bits.ADIF = 0);
+# 52 "MCAL_Layer/ADC/hal_adc.c"
   (INTCONbits.GIE = 1);
   (INTCONbits.PEIE = 1);
 
 
-  ret = gpio_pin_direction_initialize(&(obj->pin));
+  ADC_CALLBACK = obj->ADC_CallBack;
 
-  switch (obj->pin.pin) {
-  case GPIO_PIN4:
-   RB4_CallBack_HIGH = obj->callback_function_HIGH;
-   RB4_CallBack_LOW = obj->callback_function_LOW;
-   break;
 
-  case GPIO_PIN5:
-   RB5_CallBack_HIGH = obj->callback_function_HIGH;
-   RB5_CallBack_LOW = obj->callback_function_LOW;
-   break;
+  ADC_RESULT_ADJUST(obj);
 
-  case GPIO_PIN6:
-   RB6_CallBack_HIGH = obj->callback_function_HIGH;
-   RB6_CallBack_LOW = obj->callback_function_LOW;
-   break;
+  ADC_VOLTAGE_REFRECE_CONFIGURE(obj);
 
-  case GPIO_PIN7:
-   RB7_CallBack_HIGH = obj->callback_function_HIGH;
-   RB7_CallBack_LOW = obj->callback_function_LOW;
-   break;
-  default: ret = (STD_ReturnType) 0x00;
-  }
 
-  (INTCONbits.RBIE = 1);
-  ret = (STD_ReturnType) 0x01;
+  (ADCON0bits.ADON = 1);
  }
  return ret;
 }
 
-STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj)
+STD_ReturnType ADC_DEINIT(const ADC_conf_t * obj)
 {
  STD_ReturnType ret = (STD_ReturnType) 0x01;
+
  if (((void*)0) == obj) {
   ret = (STD_ReturnType) 0x00;
  } else {
-  (INTCONbits.RBIE = 0);
-  (INTCONbits.RBIF = 0);
+
+  (ADCON0bits.ADON = 0);
+
+
+  (PIE1bits.ADIE = 0);
+
  }
  return ret;
 }
 
-static STD_ReturnType interrupt_INTx_Enable(const Interrupt_INTx_t * obj)
+STD_ReturnType ADC_SelectChannnel(ADC_conf_t * obj, ADC_CHANNELS_SELECT_t channel)
 {
  STD_ReturnType ret = (STD_ReturnType) 0x01;
+
  if (((void*)0) == obj) {
   ret = (STD_ReturnType) 0x00;
  } else {
-  ret = (STD_ReturnType) 0x01;
-# 227 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
-  (INTCONbits.GIE = 1);
-  (INTCONbits.PEIE = 1);
-
-  switch (obj->src) {
-  case EXT_INT0:
-   (INTCONbits.INT0IE = 1);
-   ret = (STD_ReturnType) 0x01;
-   break;
-  case EXT_INT1:
-   (INTCON3bits.INT1E = 1);
-   ret = (STD_ReturnType) 0x01;
-   break;
-  case EXT_INT2:
-   (INTCON3bits.INT2E = 1);
-   ret = (STD_ReturnType) 0x01;
-   break;
-  default: ret = (STD_ReturnType) 0x00;
-  }
+  ADCON0bits.CHS = channel;
+  obj->ch = channel;
+  ADC_CHANNEL_PIN_CONFIGURE(obj);
  }
  return ret;
 }
 
-static STD_ReturnType interrupt_INTx_Disable(const Interrupt_INTx_t * obj)
+STD_ReturnType ADC_StartConversion(const ADC_conf_t * obj)
 {
  STD_ReturnType ret = (STD_ReturnType) 0x01;
+
  if (((void*)0) == obj) {
   ret = (STD_ReturnType) 0x00;
  } else {
-  ret = (STD_ReturnType) 0x01;
-# 266 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
-  (INTCONbits.GIE = 0);
-  (INTCONbits.PEIE = 0);
+  (ADCON0bits.GODONE = 1);
+ }
+ return ret;
+}
 
-  switch (obj->src) {
-   ret = (STD_ReturnType) 0x01;
-  case EXT_INT0:
-   (INTCONbits.INT0IE = 0);
-   break;
-  case EXT_INT1:
-   (INTCON3bits.INT1E = 0);
-   break;
-  case EXT_INT2:
-   (INTCON3bits.INT2E = 0);
-   break;
-  default: ret = (STD_ReturnType) 0x00;
+STD_ReturnType ADC_IsConversionDone(const ADC_conf_t * obj, uint8_t * state)
+{
+ STD_ReturnType ret = (STD_ReturnType) 0x01;
+
+ if (((void*)0) == obj || ((void*)0) == state) {
+  ret = (STD_ReturnType) 0x00;
+ } else {
+  *state = (uint8_t)!((ADCON0bits.GO_nDONE));
+ }
+ return ret;
+}
+
+STD_ReturnType ADC_GetConversionRes(const ADC_conf_t * obj, uint16_t* res)
+{
+ STD_ReturnType ret = (STD_ReturnType) 0x01;
+
+ if ((((void*)0) == obj) || (((void*)0) == res)) {
+  ret = (STD_ReturnType) 0x00;
+ } else {
+  if (obj->ADC_LR_ADJUST == 0x00U) {
+   *res = (uint16_t) (((ADRESH << 8) + ADRESL) >> 6);
+  } else if (obj->ADC_LR_ADJUST == 0x01U) {
+   *res = (uint16_t) ((ADRESH << 8) + ADRESL);
+  } else {
+   *res = (uint16_t) ((ADRESH << 8) + ADRESL);
   }
  }
  return ret;
 }
 
-static STD_ReturnType interrupt_INTx_Edge_Init(const Interrupt_INTx_t * obj)
+STD_ReturnType ADC_GetResFrom(const ADC_conf_t * obj, ADC_CHANNELS_SELECT_t channel, uint16_t* res)
 {
  STD_ReturnType ret = (STD_ReturnType) 0x01;
- if (((void*)0) == obj) {
+
+ if ((((void*)0) == obj) || (((void*)0) == res)) {
   ret = (STD_ReturnType) 0x00;
  } else {
-  ret = (STD_ReturnType) 0x01;
+  ret &= ADC_SelectChannnel(obj, channel);
+  ret &= ADC_StartConversion(obj);
+  while (ADCON0bits.GO_nDONE);
+  ret &= ADC_GetConversionRes(obj, res);
 
-  switch (obj->src) {
-
-  case EXT_INT0:
-   if (FALLING_EDGE == obj->edge) {
-    (INTCON2bits.INTEDG0 = 0);
-   } else if (RISING_EDGE == obj->edge) {
-    (INTCON2bits.INTEDG0 = 1);
-   } else {
-    ret = (STD_ReturnType) 0x00;
-   }
-   break;
-
-  case EXT_INT1:
-   if (FALLING_EDGE == obj->edge) {
-    (INTCON2bits.INTEDG1 = 0);
-   } else if (RISING_EDGE == obj->edge) {
-    (INTCON2bits.INTEDG1 = 1);
-   } else {
-    ret = (STD_ReturnType) 0x00;
-   }
-   break;
-
-  case EXT_INT2:
-   if (FALLING_EDGE == obj->edge) {
-    (INTCON2bits.INTEDG2 = 0);
-   } else if (RISING_EDGE == obj->edge) {
-    (INTCON2bits.INTEDG2 = 1);
-   } else {
-    ret = (STD_ReturnType) 0x00;
-   }
-   break;
-
-  default: ret = (STD_ReturnType) 0x00;
-  }
  }
  return ret;
 }
 
-static STD_ReturnType interrupt_INTx_Pin_Init(const Interrupt_INTx_t * obj)
+STD_ReturnType ADC_GetFrom_NON_BLOCKING(const ADC_conf_t * obj, ADC_CHANNELS_SELECT_t channel)
 {
  STD_ReturnType ret = (STD_ReturnType) 0x01;
+
  if (((void*)0) == obj) {
   ret = (STD_ReturnType) 0x00;
  } else {
-  ret = gpio_pin_initialize(&(obj->pin));
+  ret &= ADC_SelectChannnel(obj, channel);
+  ret &= ADC_StartConversion(obj);
+
+
  }
  return ret;
 }
-# 382 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c"
-static STD_ReturnType interrupt_INTx_Clear_Flag(const Interrupt_INTx_t * obj)
+
+static __attribute__((inline)) void ADC_CHANNEL_PIN_CONFIGURE(ADC_conf_t * obj)
 {
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if (((void*)0) == obj) {
-  ret = (STD_ReturnType) 0x00;
+ switch (obj->ch) {
+ case ADC_CHANNEL_AN0:(TRISA |= (0x01 << 0x0));
+  break;
+ case ADC_CHANNEL_AN1:(TRISA |= (0x01 << 0x1));
+  break;
+ case ADC_CHANNEL_AN2:(TRISA |= (0x01 << 0x2));
+  break;
+ case ADC_CHANNEL_AN3:(TRISA |= (0x01 << 0x3));
+  break;
+ case ADC_CHANNEL_AN4:(TRISA |= (0x01 << 0x5));
+  break;
+ case ADC_CHANNEL_AN5:(TRISE |= (0x01 << 0x0));
+  break;
+ case ADC_CHANNEL_AN6:(TRISE |= (0x01 << 0x1));
+  break;
+ case ADC_CHANNEL_AN7:(TRISE |= (0x01 << 0x2));
+  break;
+ case ADC_CHANNEL_AN8:(TRISB |= (0x01 << 0x2));
+  break;
+ case ADC_CHANNEL_AN9:(TRISB |= (0x01 << 0x3));
+  break;
+ case ADC_CHANNEL_AN10:(TRISB |= (0x01 << 0x1));
+  break;
+ case ADC_CHANNEL_AN11:(TRISB |= (0x01 << 0x4));
+  break;
+ case ADC_CHANNEL_AN12:(TRISB |= (0x01 << 0x0));
+  break;
+ };
+}
+
+static __attribute__((inline)) void ADC_RESULT_ADJUST(ADC_conf_t * obj)
+{
+ if (obj->ADC_LR_ADJUST == 0x00U) {
+  (ADCON2bits.ADFM = 0);
+ } else if (obj->ADC_LR_ADJUST == 0x01U) {
+  (ADCON2bits.ADFM = 1);
  } else {
-  ret = (STD_ReturnType) 0x01;
-  switch (obj->src) {
-  case EXT_INT0:
-   (INTCONbits.INT0IF = 0);
-   break;
-
-  case EXT_INT1:
-   (INTCON3bits.INT1F = 0);
-   break;
-
-  case EXT_INT2:
-   (INTCON3bits.INT2F = 0);
-   break;
-  }
+  (ADCON2bits.ADFM = 1);
  }
- return ret;
+}
+
+static __attribute__((inline)) void ADC_VOLTAGE_REFRECE_CONFIGURE(ADC_conf_t * obj)
+{
+ if (obj->ADC_Vref == 0x01U) {
+  (ADCON1bits.VCFG0 = 1, ADCON1bits.VCFG1 = 1);
+ } else if (obj->ADC_Vref == 0x00U) {
+  (ADCON1bits.VCFG0 = 0, ADCON1bits.VCFG1 = 0);
+ } else {
+  (ADCON1bits.VCFG0 = 0, ADCON1bits.VCFG1 = 0);
+ }
 
 }
 
-static STD_ReturnType interrupt_INTx_CallBack_Init(const Interrupt_INTx_t * obj)
+void ADC_ISR(void)
 {
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if (((void*)0) == obj) {
-  ret = (STD_ReturnType) 0x00;
- } else {
-  ret = (STD_ReturnType) 0x01;
-  switch (obj->src) {
-  case EXT_INT0:
-   if (((void*)0) == obj->callback_function) {
-    ret = (STD_ReturnType) 0x00;
-   } else {
-    INT0_CALBACK = obj->callback_function;
-   }
-   break;
-
-  case EXT_INT1:
-   if (((void*)0) == obj->callback_function) {
-    ret = (STD_ReturnType) 0x00;
-   } else {
-    INT1_CALBACK = obj->callback_function;
-   }
-   break;
-
-  case EXT_INT2:
-   if (((void*)0) == obj->callback_function) {
-    ret = (STD_ReturnType) 0x00;
-   } else {
-    INT2_CALBACK = obj->callback_function;
-   }
-   break;
-  }
- }
- return ret;
+ (PIR1bits.ADIF = 0);
+ if (ADC_CALLBACK)
+  ADC_CALLBACK();
 }

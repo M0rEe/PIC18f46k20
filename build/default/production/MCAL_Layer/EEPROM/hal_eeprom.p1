@@ -399,8 +399,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
 "50
-[; ;MCAL_Layer/EEPROM/hal_eeprom.c: 50:     if (((void*)0) == retData) {
-[e $ ! == -> -> 0 `i `*v -> -> _retData `i `*v 277  ]
+[; ;MCAL_Layer/EEPROM/hal_eeprom.c: 50:     if ( (retData > 255) || (retData < 0)) {
+[e $ ! || > -> _retData `i -> 255 `i < -> _retData `i -> 0 `i 277  ]
 {
 "51
 [; ;MCAL_Layer/EEPROM/hal_eeprom.c: 51:         ret = (STD_ReturnType) 0x00;

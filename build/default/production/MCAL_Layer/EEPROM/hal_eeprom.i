@@ -4779,7 +4779,7 @@ STD_ReturnType EEPROM_ReadByte(uint16_t address, uint8_t* retData) {
 STD_ReturnType EEPROM_WriteByte(uint16_t address, uint8_t retData) {
     STD_ReturnType ret = (STD_ReturnType) 0x01;
 
-    if (((void*)0) == retData) {
+    if ( (retData > 255) || (retData < 0)) {
         ret = (STD_ReturnType) 0x00;
     } else {
 

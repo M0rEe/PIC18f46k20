@@ -12,7 +12,7 @@
 /*  Section : Includes    */
 #include <xc.h>
 /*  Section : Macro Declarations     */
-#define _XTAL_FREQ 16000000
+#define _XTAL_FREQ 8000000
 
 /*  Section : Macro Functions Declarations    */
 

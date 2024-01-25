@@ -1,59 +1,36 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"60 ./MCAL_Layer/ADC/../GPIO/hal_gpio.h
-[s S273 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S273 . port pin direction logic ]
-"45 ./ECU_Layer/LCD/ecu_lcd.h
-[; ;./ECU_Layer/LCD/ecu_lcd.h: 45: typedef struct{
-[s S275 `S273 1 `S273 1 `S273 -> 4 `i ]
-[n S275 . rs en data_pin ]
+"23 ./ECU_Layer/LED/ecu_led.h
+[; ;./ECU_Layer/LED/ecu_led.h: 23: typedef struct {
+[s S274 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S274 . port_name pin led_status Reserved ]
 "14 Application.c
-[; ;Application.c: 14: lcd_4bit_t lcd_1 = {
+[; ;Application.c: 14: led_t led3 = {
 [c E2990 0 1 2 3 4 .. ]
 [n E2990 . PORTA_INDEX PORTB_INDEX PORTC_INDEX PORTD_INDEX PORTE_INDEX  ]
 [c E2980 0 1 2 3 4 5 6 7 .. ]
 [n E2980 . GPIO_PIN0 GPIO_PIN1 GPIO_PIN2 GPIO_PIN3 GPIO_PIN4 GPIO_PIN5 GPIO_PIN6 GPIO_PIN7  ]
-[c E2976 0 1 .. ]
-[n E2976 . GPIO_DIRECTION_OUTPUT GPIO_DIRECTION_INPUT  ]
-[c E2972 0 1 .. ]
-[n E2972 . GPIO_LOW GPIO_HIGH  ]
-[v F3272 `(v ~T0 @X0 0 tf ]
-"40
-[; ;Application.c: 40: ADC_conf_t ad1 = {
+[c E3032 0 1 .. ]
+[n E3032 . LED_OFF LED_ON  ]
+"1104 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4620.h
+[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
+[v F3315 `(v ~T0 @X0 0 tf ]
+"25 Application.c
+[; ;Application.c: 25: timer0_t tt = {
 [c E3193 0 1 .. ]
 [n E3193 . LOW_PRIORITY HIGH_PRIORITY  ]
-[c E3251 0 1 2 3 4 5 6 7 .. ]
-[n E3251 . ADC_0TAD ADC_2TAD ADC_4TAD ADC_6TAD ADC_8TAD ADC_12TAD ADC_16TAD ADC_20TAD  ]
-[c E3261 0 1 2 3 4 5 6 .. ]
-[n E3261 . FoscBy2 FoscBy8 FoscBy32 Frc FoscBy4 FoscBy16 FoscBy64  ]
-[c E3236 0 1 2 3 4 5 6 7 8 9 10 11 12 .. ]
-[n E3236 . ADC_CHANNEL_AN0 ADC_CHANNEL_AN1 ADC_CHANNEL_AN2 ADC_CHANNEL_AN3 ADC_CHANNEL_AN4 ADC_CHANNEL_AN5 ADC_CHANNEL_AN6 ADC_CHANNEL_AN7 ADC_CHANNEL_AN8 ADC_CHANNEL_AN9 ADC_CHANNEL_AN10 ADC_CHANNEL_AN11 ADC_CHANNEL_AN12  ]
-"106 ./MCAL_Layer/ADC/hal_adc.h
-[; ;./MCAL_Layer/ADC/hal_adc.h: 106: typedef struct {
-[s S284 `*F3272 1 `E3193 1 `E3251 1 `E3261 1 `E3236 1 :1 `uc 1 :1 `uc 1 :6 `uc 1 ]
-[n S284 . ADC_CallBack priority aqcTime clk ch ADC_LR_ADJUST ADC_Vref Reserved ]
-"12 Application.c
-[; ;Application.c: 12: void adisr(void);
-[v _adisr `(v ~T0 @X0 0 ef ]
-"126 ./MCAL_Layer/ADC/hal_adc.h
-[; ;./MCAL_Layer/ADC/hal_adc.h: 126: STD_ReturnType ADC_GetConversionRes(const ADC_conf_t * obj, uint16_t* res);
-[v _ADC_GetConversionRes `(uc ~T0 @X0 0 ef2`*CS284`*us ]
+[c E3303 0 1 2 3 4 5 6 7 .. ]
+[n E3303 . TIMER0_PRESCALER_BY_2 TIMER0_PRESCALER_BY_4 TIMER0_PRESCALER_BY_8 TIMER0_PRESCALER_BY_16 TIMER0_PRESCALER_BY_32 TIMER0_PRESCALER_BY_64 TIMER0_PRESCALER_BY_128 TIMER0_PRESCALER_BY_256  ]
+"59 ./MCAL_Layer/TIMER0/hal_timer0.h
+[; ;./MCAL_Layer/TIMER0/hal_timer0.h: 59: typedef struct {
+[s S285 `*F3315 1 `E3193 1 `E3303 1 `us 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S285 . callBack priority prescalerValue preloadedValue prescalerEnable counterEdge mode regSize Reserved ]
 [p mainexit ]
-"120
-[; ;./MCAL_Layer/ADC/hal_adc.h: 120: STD_ReturnType ADC_INIT(const ADC_conf_t * obj);
-[v _ADC_INIT `(uc ~T0 @X0 0 ef1`*CS284 ]
-"57 ./ECU_Layer/LCD/ecu_lcd.h
-[; ;./ECU_Layer/LCD/ecu_lcd.h: 57: STD_ReturnType lcd_4bit_intialize(const lcd_4bit_t *lcd);
-[v _lcd_4bit_intialize `(uc ~T0 @X0 0 ef1`*CS275 ]
-"62
-[; ;./ECU_Layer/LCD/ecu_lcd.h: 62: STD_ReturnType lcd_4bit_send_string_pos(const lcd_4bit_t *lcd, uint8_t row, uint8_t column, uint8_t *str);
-[v _lcd_4bit_send_string_pos `(uc ~T0 @X0 0 ef4`*CS275`uc`uc`*uc ]
-[v F2948 `(v ~T0 @X0 1 tf1`ul ]
-"12 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\builtins.h
-[v __delay `JF2948 ~T0 @X0 0 e ]
-[p i __delay ]
-"128 ./MCAL_Layer/ADC/hal_adc.h
-[; ;./MCAL_Layer/ADC/hal_adc.h: 128: STD_ReturnType ADC_GetFrom_NON_BLOCKING(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel );
-[v _ADC_GetFrom_NON_BLOCKING `(uc ~T0 @X0 0 ef2`*CS284`E3236 ]
+"34 ./ECU_Layer/LED/ecu_led.h
+[; ;./ECU_Layer/LED/ecu_led.h: 34: STD_ReturnType led_init(const led_t * led);
+[v _led_init `(uc ~T0 @X0 0 ef1`*CS274 ]
+"73 ./MCAL_Layer/TIMER0/hal_timer0.h
+[; ;./MCAL_Layer/TIMER0/hal_timer0.h: 73: STD_ReturnType timer0_Init(const timer0_t* obj);
+[v _timer0_Init `(uc ~T0 @X0 0 ef1`*CS285 ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4620.h
 [; <" PORTA equ 0F80h ;# ">
 "191
@@ -328,164 +305,89 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; <" TOSH equ 0FFEh ;# ">
 "6715
 [; <" TOSU equ 0FFFh ;# ">
-"14 Application.c
-[; ;Application.c: 14: lcd_4bit_t lcd_1 = {
-[v _lcd_1 `S275 ~T0 @X0 1 e ]
-[i _lcd_1
-:U ..
-:U ..
+"12 Application.c
+[; ;Application.c: 12: volatile uint16_t flag = 0;
+[v _flag `Vus ~T0 @X0 1 e ]
+[i _flag
+-> -> 0 `i `us
+]
+"14
+[; ;Application.c: 14: led_t led3 = {
+[v _led3 `S274 ~T0 @X0 1 e ]
+[i _led3
 :U ..
 :U ..
 -> . `E2990 2 `uc
 -> . `E2980 0 `uc
--> . `E2976 0 `uc
--> . `E2972 0 `uc
-..
-..
-:U ..
-:U ..
--> . `E2990 2 `uc
--> . `E2980 1 `uc
--> . `E2976 0 `uc
--> . `E2972 0 `uc
-..
-..
-:U ..
-:U ..
--> . `E2990 2 `uc
--> . `E2980 2 `uc
--> . `E2976 0 `uc
--> . `E2972 0 `uc
-..
-:U ..
--> . `E2990 2 `uc
--> . `E2980 3 `uc
--> . `E2976 0 `uc
--> . `E2972 0 `uc
-..
-:U ..
--> . `E2990 2 `uc
--> . `E2980 4 `uc
--> . `E2976 0 `uc
--> . `E2972 0 `uc
-..
-:U ..
--> . `E2990 2 `uc
--> . `E2980 5 `uc
--> . `E2976 0 `uc
--> . `E2972 0 `uc
-..
-..
+-> . `E3032 0 `uc
 ..
 ..
 ]
-"40
-[; ;Application.c: 40: ADC_conf_t ad1 = {
-[v _ad1 `S284 ~T0 @X0 1 e ]
-[i _ad1
-:U ..
-:U ..
-&U _adisr
--> -> 0 `i `E3193
-. `E3251 5
-. `E3261 5
-. `E3236 0
--> -> 1 `ui `uc
--> -> 0 `ui `uc
-..
-..
-]
-"49
-[; ;Application.c: 49: uint16_t res1 = 0;
-[v _res1 `us ~T0 @X0 1 e ]
-[i _res1
--> -> 0 `i `us
-]
-"50
-[; ;Application.c: 50: uint8_t flag = 0;
-[v _flag `uc ~T0 @X0 1 e ]
-[i _flag
--> -> 0 `i `uc
-]
-"52
-[; ;Application.c: 52: void adisr(void)
-[v _adisr `(v ~T0 @X0 1 ef ]
-"53
-[; ;Application.c: 53: {
+"20
+[; ;Application.c: 20: void functionss(void)
+[v _functionss `(v ~T0 @X0 1 ef ]
+"21
+[; ;Application.c: 21: {
 {
-[e :U _adisr ]
+[e :U _functionss ]
 [f ]
-"54
-[; ;Application.c: 54:  ADC_GetConversionRes(&ad1, &res1);
-[e ( _ADC_GetConversionRes (2 , -> &U _ad1 `*CS284 &U _res1 ]
-"55
-[; ;Application.c: 55:  flag++;
-[e ++ _flag -> -> 1 `i `uc ]
-"56
-[; ;Application.c: 56: }
-[e :UE 285 ]
+"22
+[; ;Application.c: 22:  flag++;
+[e ++ _flag -> -> 1 `i `Vus ]
+"23
+[; ;Application.c: 23:  (*(&LATC) ^= (0x01 << GPIO_PIN0));
+[e =^ *U &U _LATC -> << -> 1 `i -> . `E2980 0 `i `uc ]
+"24
+[; ;Application.c: 24: };
+[e :UE 286 ]
 }
-"57
-[; ;Application.c: 57: uint8_t chr[] = {
-[v _chr `uc ~T0 @X0 -> 8 `i e ]
-[i _chr
+"25
+[; ;Application.c: 25: timer0_t tt = {
+[v _tt `S285 ~T0 @X0 1 e ]
+[i _tt
 :U ..
+:U ..
+&U _functionss
+-> -> 0 `i `E3193
+. `E3303 2
+-> -> 3036 `i `us
+-> -> 1 `i `uc
 -> -> 0 `i `uc
--> -> 4 `i `uc
--> -> 12 `i `uc
--> -> 20 `i `uc
--> -> 20 `i `uc
--> -> 31 `i `uc
--> -> 4 `i `uc
+-> -> 1 `i `uc
 -> -> 0 `i `uc
+..
 ..
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"68
-[; ;Application.c: 68: int main(int argc, char **argv)
-[v _main `(i ~T0 @X0 1 ef2`i`**uc ]
-"69
-[; ;Application.c: 69: {
+"34
+[; ;Application.c: 34: int main()
+[v _main `(i ~T0 @X0 1 ef ]
+"35
+[; ;Application.c: 35: {
 {
 [e :U _main ]
-"68
-[; ;Application.c: 68: int main(int argc, char **argv)
-[v _argc `i ~T0 @X0 1 r1 ]
-[v _argv `**uc ~T0 @X0 1 r2 ]
-"69
-[; ;Application.c: 69: {
 [f ]
-"70
-[; ;Application.c: 70:  ADC_INIT(&ad1);
-[e ( _ADC_INIT (1 -> &U _ad1 `*CS284 ]
-"72
-[; ;Application.c: 72:  lcd_4bit_intialize(&lcd_1);
-[e ( _lcd_4bit_intialize (1 -> &U _lcd_1 `*CS275 ]
-"74
-[; ;Application.c: 74:  lcd_4bit_send_string_pos(&lcd_1, 1, 7, "ADC TEST");
-[e ( _lcd_4bit_send_string_pos (4 , , , -> &U _lcd_1 `*CS275 -> -> 1 `i `uc -> -> 7 `i `uc :s 1C ]
-"75
-[; ;Application.c: 75:  _delay((unsigned long)((2000)*(16000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-"76
-[; ;Application.c: 76:  while (1) {
-[e :U 288 ]
-{
-"77
-[; ;Application.c: 77:   ADC_GetFrom_NON_BLOCKING(&ad1, ADC_CHANNEL_AN0);
-[e ( _ADC_GetFrom_NON_BLOCKING (2 , -> &U _ad1 `*CS284 . `E3236 0 ]
-"78
-[; ;Application.c: 78:  }
-}
-[e :U 287 ]
-[e $U 288  ]
+"36
+[; ;Application.c: 36:  led_init(&led3);
+[e ( _led_init (1 -> &U _led3 `*CS274 ]
+"37
+[; ;Application.c: 37:  timer0_Init(&tt);
+[e ( _timer0_Init (1 -> &U _tt `*CS285 ]
+"38
+[; ;Application.c: 38:  while (1) {
 [e :U 289 ]
-"80
-[; ;Application.c: 80:  return(0);
-[e ) -> 0 `i ]
-[e $UE 286  ]
-"81
-[; ;Application.c: 81: }
-[e :UE 286 ]
+{
+"40
+[; ;Application.c: 40:  }
 }
-[a 1C 65 68 67 32 84 69 83 84 0 ]
+[e :U 288 ]
+[e $U 289  ]
+[e :U 290 ]
+"42
+[; ;Application.c: 42:  return(0);
+[e ) -> 0 `i ]
+[e $UE 287  ]
+"43
+[; ;Application.c: 43: }
+[e :UE 287 ]
+}

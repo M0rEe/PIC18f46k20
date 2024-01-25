@@ -17,7 +17,7 @@ STD_ReturnType EEPROM_ReadByte(uint16_t address, uint8_t* retData) {
         uint8_t Global_Interrupt_states = INTCONbits.GIE;
         /*Disable interrupt*/
 #if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
-        INTERRUPT_GlobalInterruptHighDisable()
+        INTERRUPT_GlobalInterruptHighDisable();
 #else
         INTERRUPT_GlobalInterruptDisable();
 #endif
@@ -55,14 +55,14 @@ STD_ReturnType EEPROM_WriteByte(uint16_t address, uint8_t retData) {
 
         /*Disable interrupt*/
 #if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
-        INTERRUPT_GlobalInterruptHighDisable()
+        INTERRUPT_GlobalInterruptHighDisable();
 #else
         INTERRUPT_GlobalInterruptDisable();
 #endif
         /*Write Addres to addresH/L*/
         EEPROM_WRITE_ADDRESH((uint8_t) ((address >> 8)& 0x03));
         EEPROM_WRITE_ADDRESL((uint8_t) ((address)& 0x0ff));
-        /*Write Data to DAta register*/
+        /*Write Data to Data register*/
         EEPROM_WRITE_DATA_REG(retData);
         /*Clear CFGS*/ //Select EEPROM 
         EEPROM_SELECT_PERIPHERAL();

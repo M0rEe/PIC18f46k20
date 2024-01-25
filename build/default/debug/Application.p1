@@ -3,43 +3,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./ECU_Layer/LED/ecu_led.h: 23: typedef struct {
 [s S274 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S274 . port_name pin led_status Reserved ]
-"12 Application.c
-[; ;Application.c: 12: led_t led4 = {
+"14 Application.c
+[; ;Application.c: 14: led_t led3 = {
 [c E2990 0 1 2 3 4 .. ]
 [n E2990 . PORTA_INDEX PORTB_INDEX PORTC_INDEX PORTD_INDEX PORTE_INDEX  ]
 [c E2980 0 1 2 3 4 5 6 7 .. ]
 [n E2980 . GPIO_PIN0 GPIO_PIN1 GPIO_PIN2 GPIO_PIN3 GPIO_PIN4 GPIO_PIN5 GPIO_PIN6 GPIO_PIN7  ]
-[c E2972 0 1 .. ]
-[n E2972 . GPIO_LOW GPIO_HIGH  ]
-"35 ./ECU_Layer/LED/ecu_led.h
-[; ;./ECU_Layer/LED/ecu_led.h: 35: STD_ReturnType led_on(const led_t * led);
-[v _led_on `(uc ~T0 @X0 0 ef1`*CS274 ]
-[v F3216 `(v ~T0 @X0 0 tf ]
-[v F3218 `(v ~T0 @X0 0 tf ]
-"60 ./MCAL_Layer/Interrupt/../GPIO/hal_gpio.h
-[s S273 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S273 . port pin direction logic ]
-"23 Application.c
-[; ;Application.c: 23: Interrupt_RBx_t RB4_app = {
+[c E3032 0 1 .. ]
+[n E3032 . LED_OFF LED_ON  ]
+"1104 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4620.h
+[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
+[v F3315 `(v ~T0 @X0 0 tf ]
+"25 Application.c
+[; ;Application.c: 25: timer0_t tt = {
 [c E3193 0 1 .. ]
 [n E3193 . LOW_PRIORITY HIGH_PRIORITY  ]
-"93 ./MCAL_Layer/Interrupt/mcal_external_interrupt.h
-[; ;./MCAL_Layer/Interrupt/mcal_external_interrupt.h: 93: typedef struct {
-[s S283 `*F3216 1 `*F3218 1 `S273 1 `E3193 1 ]
-[n S283 . callback_function_HIGH callback_function_LOW pin priority ]
-[v F3233 `(v ~T0 @X0 0 tf ]
-[v F3235 `(v ~T0 @X0 0 tf ]
-"23 Application.c
-[; ;Application.c: 23: Interrupt_RBx_t RB4_app = {
-[c E2976 0 1 .. ]
-[n E2976 . GPIO_DIRECTION_OUTPUT GPIO_DIRECTION_INPUT  ]
+[c E3303 0 1 2 3 4 5 6 7 .. ]
+[n E3303 . TIMER0_PRESCALER_BY_2 TIMER0_PRESCALER_BY_4 TIMER0_PRESCALER_BY_8 TIMER0_PRESCALER_BY_16 TIMER0_PRESCALER_BY_32 TIMER0_PRESCALER_BY_64 TIMER0_PRESCALER_BY_128 TIMER0_PRESCALER_BY_256  ]
+"59 ./MCAL_Layer/TIMER0/hal_timer0.h
+[; ;./MCAL_Layer/TIMER0/hal_timer0.h: 59: typedef struct {
+[s S285 `*F3315 1 `E3193 1 `E3303 1 `us 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S285 . callBack priority prescalerValue preloadedValue prescalerEnable counterEdge mode regSize Reserved ]
 [p mainexit ]
-"105 ./MCAL_Layer/Interrupt/mcal_external_interrupt.h
-[; ;./MCAL_Layer/Interrupt/mcal_external_interrupt.h: 105: STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj);
-[v _Interrupt_RBx_Init `(uc ~T0 @X0 0 ef1`*S283 ]
 "34 ./ECU_Layer/LED/ecu_led.h
 [; ;./ECU_Layer/LED/ecu_led.h: 34: STD_ReturnType led_init(const led_t * led);
 [v _led_init `(uc ~T0 @X0 0 ef1`*CS274 ]
+"73 ./MCAL_Layer/TIMER0/hal_timer0.h
+[; ;./MCAL_Layer/TIMER0/hal_timer0.h: 73: STD_ReturnType timer0_Init(const timer0_t* obj);
+[v _timer0_Init `(uc ~T0 @X0 0 ef1`*CS285 ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4620.h
 [; <" PORTA equ 0F80h ;# ">
 "191
@@ -315,83 +306,88 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6715
 [; <" TOSU equ 0FFFh ;# ">
 "12 Application.c
-[; ;Application.c: 12: led_t led4 = {
-[v _led4 `S274 ~T0 @X0 1 e ]
-[i _led4
+[; ;Application.c: 12: volatile uint16_t flag = 0;
+[v _flag `Vus ~T0 @X0 1 e ]
+[i _flag
+-> -> 0 `i `us
+]
+"14
+[; ;Application.c: 14: led_t led3 = {
+[v _led3 `S274 ~T0 @X0 1 e ]
+[i _led3
 :U ..
 :U ..
--> . `E2990 2 `uc
+-> . `E2990 3 `uc
 -> . `E2980 0 `uc
--> . `E2972 0 `uc
+-> . `E3032 0 `uc
 ..
 ..
 ]
-"18
-[; ;Application.c: 18: void sssss() {
-[v _sssss `(v ~T0 @X0 1 ef ]
-{
-[e :U _sssss ]
-[f ]
-"19
-[; ;Application.c: 19:     led_on(&led4);
-[e ( _led_on (1 -> &U _led4 `*CS274 ]
 "20
-[; ;Application.c: 20: }
-[e :UE 284 ]
-}
+[; ;Application.c: 20: void functionss(void)
+[v _functionss `(v ~T0 @X0 1 ef ]
+"21
+[; ;Application.c: 21: {
+{
+[e :U _functionss ]
+[f ]
+"22
+[; ;Application.c: 22:  flag++;
+[e ++ _flag -> -> 1 `i `Vus ]
 "23
-[; ;Application.c: 23: Interrupt_RBx_t RB4_app = {
-[v _RB4_app `S283 ~T0 @X0 1 e ]
-[i _RB4_app
+[; ;Application.c: 23:  (*(&LATC) ^= (0x01 << GPIO_PIN0));
+[e =^ *U &U _LATC -> << -> 1 `i -> . `E2980 0 `i `uc ]
+"24
+[; ;Application.c: 24: };
+[e :UE 286 ]
+}
+"25
+[; ;Application.c: 25: timer0_t tt = {
+[v _tt `S285 ~T0 @X0 1 e ]
+[i _tt
 :U ..
 :U ..
--> &U _sssss `*F3233
--> &U _sssss `*F3235
-:U ..
-:U ..
--> . `E2990 1 `uc
--> . `E2980 4 `uc
--> . `E2976 1 `uc
-..
-..
-. `E3193 1
+&U _functionss
+-> -> 0 `i `E3193
+. `E3303 5
+-> -> 0 `i `us
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+-> -> 0 `i `uc
 ..
 ..
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
 "34
-[; ;Application.c: 34: int main(int argc, char **argv) {
-[v _main `(i ~T0 @X0 1 ef2`i`**uc ]
+[; ;Application.c: 34: int main()
+[v _main `(i ~T0 @X0 1 ef ]
+"35
+[; ;Application.c: 35: {
 {
 [e :U _main ]
-[v _argc `i ~T0 @X0 1 r1 ]
-[v _argv `**uc ~T0 @X0 1 r2 ]
 [f ]
 "36
-[; ;Application.c: 36:     STD_ReturnType ret = (STD_ReturnType) 0x01;
-[v _ret `uc ~T0 @X0 1 a ]
-[e = _ret -> -> 1 `i `uc ]
+[; ;Application.c: 36:  led_init(&led3);
+[e ( _led_init (1 -> &U _led3 `*CS274 ]
 "37
-[; ;Application.c: 37:     ret = Interrupt_RBx_Init(&RB4_app);
-[e = _ret ( _Interrupt_RBx_Init (1 &U _RB4_app ]
+[; ;Application.c: 37:  timer0_Init(&tt);
+[e ( _timer0_Init (1 -> &U _tt `*CS285 ]
 "38
-[; ;Application.c: 38:     ret = led_init(&led4);
-[e = _ret ( _led_init (1 -> &U _led4 `*CS274 ]
-"40
-[; ;Application.c: 40:     while (1) {
-[e :U 287 ]
+[; ;Application.c: 38:  while (1) {
+[e :U 289 ]
 {
-"41
-[; ;Application.c: 41:     }
+"40
+[; ;Application.c: 40:  }
 }
-[e :U 286 ]
-[e $U 287  ]
 [e :U 288 ]
-"43
-[; ;Application.c: 43:     return (0);
+[e $U 289  ]
+[e :U 290 ]
+"42
+[; ;Application.c: 42:  return(0);
 [e ) -> 0 `i ]
-[e $UE 285  ]
-"44
-[; ;Application.c: 44: }
-[e :UE 285 ]
+[e $UE 287  ]
+"43
+[; ;Application.c: 43: }
+[e :UE 287 ]
 }

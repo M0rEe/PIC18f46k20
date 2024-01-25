@@ -152,7 +152,7 @@ STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj)
 #if INTERRUPT_PRIORITY_LEVELS == FEATURE_ENABLED
 		INTERRUPT_PriorityLevelEnable();
 		INTERRUPT_GlobalInterruptHighEnable();
-
+		
 		if (obj->priority == HIGH_PRIORITY) {
 			EXT_RBx_HIGH_PRIORITY_SET();
 		} else if (obj->priority == LOW_PRIORITY) {
@@ -350,8 +350,8 @@ static STD_ReturnType interrupt_INTx_Priority_Init(const Interrupt_INTx_t * obj)
 		ret = E_NOT_OK;
 	} else {
 		ret = E_OK;
+		INTERRUPT_PriorityLevelEnable();
 		switch (obj->src) {
-
 		case EXT_INT1:
 			if (HIGH_PRIORITY == obj->priority) {
 				EXT_INT1_HIGH_PRIORITY_SET();

@@ -11,9 +11,11 @@
 # 1 "./Application.h" 1
 # 12 "./Application.h"
 # 1 "./ECU_Layer/ecu_layer_init.h" 1
-# 10 "./ECU_Layer/ecu_layer_init.h"
-# 1 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h" 1
-# 12 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h"
+# 11 "./ECU_Layer/ecu_layer_init.h"
+# 1 "./ECU_Layer/LED/ecu_led.h" 1
+# 13 "./ECU_Layer/LED/ecu_led.h"
+# 1 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/hal_gpio.h" 1
+# 12 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/hal_gpio.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\proc\\../proc/pic18f4620.h" 1 3
 # 44 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\proc\\../proc/pic18f4620.h" 3
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\__at.h" 1 3
@@ -4226,11 +4228,11 @@ extern volatile __bit nWR __attribute__((address(0x7C21)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x7E3A)));
-# 13 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h" 2
-# 1 "./ECU_Layer/../MCAL_Layer/GPIO/../mcal_std_types.h" 1
-# 12 "./ECU_Layer/../MCAL_Layer/GPIO/../mcal_std_types.h"
-# 1 "./ECU_Layer/../MCAL_Layer/GPIO/../std_libraries.h" 1
-# 12 "./ECU_Layer/../MCAL_Layer/GPIO/../std_libraries.h"
+# 13 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/hal_gpio.h" 2
+# 1 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../mcal_std_types.h" 1
+# 12 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../mcal_std_types.h"
+# 1 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../std_libraries.h" 1
+# 12 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../std_libraries.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdio.h" 1 3
 
 
@@ -4401,7 +4403,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 13 "./ECU_Layer/../MCAL_Layer/GPIO/../std_libraries.h" 2
+# 13 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../std_libraries.h" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdlib.h" 1 3
 # 21 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdlib.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4479,7 +4481,7 @@ typedef struct { unsigned int quot, rem; } udiv_t;
 typedef struct { unsigned long quot, rem; } uldiv_t;
 udiv_t udiv (unsigned int, unsigned int);
 uldiv_t uldiv (unsigned long, unsigned long);
-# 14 "./ECU_Layer/../MCAL_Layer/GPIO/../std_libraries.h" 2
+# 14 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../std_libraries.h" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\string.h" 1 3
 # 25 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\string.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -4537,10 +4539,10 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 15 "./ECU_Layer/../MCAL_Layer/GPIO/../std_libraries.h" 2
-# 13 "./ECU_Layer/../MCAL_Layer/GPIO/../mcal_std_types.h" 2
-# 1 "./ECU_Layer/../MCAL_Layer/GPIO/../compiler.h" 1
-# 13 "./ECU_Layer/../MCAL_Layer/GPIO/../compiler.h"
+# 15 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../std_libraries.h" 2
+# 13 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../mcal_std_types.h" 2
+# 1 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../compiler.h" 1
+# 13 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../compiler.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4701,14 +4703,14 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\xc.h" 2 3
-# 14 "./ECU_Layer/../MCAL_Layer/GPIO/../compiler.h" 2
-# 14 "./ECU_Layer/../MCAL_Layer/GPIO/../mcal_std_types.h" 2
-# 30 "./ECU_Layer/../MCAL_Layer/GPIO/../mcal_std_types.h"
+# 14 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../compiler.h" 2
+# 14 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../mcal_std_types.h" 2
+# 30 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../mcal_std_types.h"
 typedef uint8_t STD_ReturnType ;
-# 14 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h" 2
-# 1 "./ECU_Layer/../MCAL_Layer/GPIO/../device_config.h" 1
-# 15 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h" 2
-# 26 "./ECU_Layer/../MCAL_Layer/GPIO/hal_gpio.h"
+# 14 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/hal_gpio.h" 2
+# 1 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/../device_config.h" 1
+# 15 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/hal_gpio.h" 2
+# 26 "./ECU_Layer/LED/../../MCAL_Layer/GPIO/hal_gpio.h"
 typedef enum
 {
     GPIO_LOW = 0,
@@ -4765,9 +4767,7 @@ STD_ReturnType gpio_port_get_direction_status(port_index_t port_num, uint8_t *di
 STD_ReturnType gpio_port_write_logic(port_index_t port_num, uint8_t logic);
 STD_ReturnType gpio_port_read_logic(port_index_t port_num, uint8_t *logic);
 STD_ReturnType gpio_port_toggle_logic(port_index_t port_num);
-# 11 "./ECU_Layer/ecu_layer_init.h" 2
-# 1 "./ECU_Layer/LED/ecu_led.h" 1
-# 14 "./ECU_Layer/LED/ecu_led.h"
+# 14 "./ECU_Layer/LED/ecu_led.h" 2
 # 1 "./ECU_Layer/LED/ecu_led_cfg.h" 1
 # 15 "./ECU_Layer/LED/ecu_led.h" 2
 
@@ -4962,6 +4962,7 @@ STD_ReturnType relayON(const relay_t * relay);
 STD_ReturnType relayOFF(const relay_t * relay);
 # 18 "./ECU_Layer/ecu_layer_init.h" 2
 # 13 "./Application.h" 2
+
 # 1 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h" 1
 # 12 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h"
 # 1 "./MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 1
@@ -4977,7 +4978,7 @@ typedef enum {
 # 74 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h"
 typedef enum {
     FALLING_EDGE = 0,
-    RISNIG_EDGE
+    RISING_EDGE
 } interrupt_INTx_edge;
 
 typedef enum {
@@ -5008,39 +5009,149 @@ STD_ReturnType Interrupt_INTx_DeInit(Interrupt_INTx_t * obj);
 
 STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj);
 STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj);
-# 14 "./Application.h" 2
+# 15 "./Application.h" 2
+
+# 1 "./MCAL_Layer/EEPROM/hal_eeprom.h" 1
+# 11 "./MCAL_Layer/EEPROM/hal_eeprom.h"
+# 1 "./MCAL_Layer/EEPROM/../Interrupt/mcal_internal_interrupt.h" 1
+# 11 "./MCAL_Layer/EEPROM/hal_eeprom.h" 2
+# 41 "./MCAL_Layer/EEPROM/hal_eeprom.h"
+STD_ReturnType EEPROM_ReadByte(uint16_t address,uint8_t* retData);
+STD_ReturnType EEPROM_WriteByte(uint16_t address,uint8_t retData);
+# 17 "./Application.h" 2
+
+# 1 "./MCAL_Layer/ADC/hal_adc.h" 1
+# 11 "./MCAL_Layer/ADC/hal_adc.h"
+# 1 "./MCAL_Layer/ADC/hal_adc_cfg.h" 1
+# 11 "./MCAL_Layer/ADC/hal_adc.h" 2
+# 68 "./MCAL_Layer/ADC/hal_adc.h"
+typedef enum {
+    ADC_CHANNEL_AN0 = 0,
+    ADC_CHANNEL_AN1,
+    ADC_CHANNEL_AN2,
+    ADC_CHANNEL_AN3,
+    ADC_CHANNEL_AN4,
+    ADC_CHANNEL_AN5,
+    ADC_CHANNEL_AN6,
+    ADC_CHANNEL_AN7,
+    ADC_CHANNEL_AN8,
+    ADC_CHANNEL_AN9,
+    ADC_CHANNEL_AN10,
+    ADC_CHANNEL_AN11,
+    ADC_CHANNEL_AN12
+} ADC_CHANNELS_SELECT_t;
+
+typedef enum {
+    ADC_0TAD = 0,
+    ADC_2TAD,
+    ADC_4TAD,
+    ADC_6TAD,
+    ADC_8TAD,
+    ADC_12TAD,
+    ADC_16TAD,
+    ADC_20TAD,
+} ADC_ACQ_TIME_t;
+
+typedef enum {
+    FoscBy2 = 0,
+    FoscBy8,
+    FoscBy32,
+    Frc,
+    FoscBy4,
+    FoscBy16,
+    FoscBy64,
+
+} ADC_CONVERSION_CLOCK_t;
+
+typedef struct {
+
+    void (*ADC_CallBack)(void);
+    interrupt_priority_cfg priority;
+
+    ADC_ACQ_TIME_t aqcTime;
+    ADC_CONVERSION_CLOCK_t clk;
+    ADC_CHANNELS_SELECT_t ch;
+    uint8_t ADC_LR_ADJUST : 1;
+    uint8_t ADC_Vref : 1;
+    uint8_t Reserved : 6;
+} ADC_conf_t;
+
+
+STD_ReturnType ADC_INIT(const ADC_conf_t * obj);
+STD_ReturnType ADC_DEINIT(const ADC_conf_t * obj);
+
+STD_ReturnType ADC_SelectChannnel( ADC_conf_t * obj, ADC_CHANNELS_SELECT_t channel);
+STD_ReturnType ADC_StartConversion(const ADC_conf_t * obj);
+STD_ReturnType ADC_IsConversionDone(const ADC_conf_t * obj, uint8_t * state);
+STD_ReturnType ADC_GetConversionRes(const ADC_conf_t * obj, uint16_t* res);
+STD_ReturnType ADC_GetResFrom(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel ,uint16_t* res);
+STD_ReturnType ADC_GetFrom_NON_BLOCKING(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel );
+# 19 "./Application.h" 2
+
+# 1 "./MCAL_Layer/TIMER0/hal_timer0.h" 1
+# 48 "./MCAL_Layer/TIMER0/hal_timer0.h"
+typedef enum {
+    TIMER0_PRESCALER_BY_2=0,
+    TIMER0_PRESCALER_BY_4,
+    TIMER0_PRESCALER_BY_8,
+    TIMER0_PRESCALER_BY_16,
+    TIMER0_PRESCALER_BY_32,
+    TIMER0_PRESCALER_BY_64,
+    TIMER0_PRESCALER_BY_128,
+    TIMER0_PRESCALER_BY_256
+} timer0_prescaler_select_t;
+
+typedef struct {
+
+    void (*callBack)(void);
+    interrupt_priority_cfg priority ;
+
+    timer0_prescaler_select_t prescalerValue;
+    uint16_t preloadedValue;
+    uint8_t prescalerEnable : 1;
+    uint8_t counterEdge : 1;
+    uint8_t mode : 1;
+    uint8_t regSize : 1;
+    uint8_t Reserved :4;
+} timer0_t;
+
+STD_ReturnType timer0_Init(const timer0_t* obj);
+STD_ReturnType timer0_Deinit(const timer0_t* obj);
+
+STD_ReturnType timer0_Write_Value(const timer0_t* obj, uint16_t val);
+STD_ReturnType timer0_Read_Value(const timer0_t* obj, uint16_t* val);
+# 21 "./Application.h" 2
 # 11 "Application.c" 2
 
-led_t led4 = {
-    .port_name = PORTC_INDEX, .pin = GPIO_PIN0, .led_status = GPIO_LOW
+volatile uint16_t flag = 0;
+
+led_t led3 = {
+ .port_name = PORTD_INDEX,
+ .pin = GPIO_PIN0,
+ .led_status = LED_OFF
 };
 
-
-
-void sssss() {
-    led_on(&led4);
-}
-
-
-Interrupt_RBx_t RB4_app = {
-    .pin.port = PORTB_INDEX,
-    .pin.pin = GPIO_PIN4,
-    .pin.direction = GPIO_DIRECTION_INPUT,
-    .priority = HIGH_PRIORITY,
-    .callback_function_LOW = sssss,
-    .callback_function_HIGH = sssss
+void functionss(void)
+{
+ flag++;
+ (*(&LATC) ^= (0x01 << GPIO_PIN0));
+};
+timer0_t tt = {
+ .prescalerValue = TIMER0_PRESCALER_BY_64,
+ .callBack = functionss,
+ .preloadedValue = 0,
+ .prescalerEnable = 1,
+ .mode = 1,
+ .regSize = 0,
 };
 
+int main()
+{
+ led_init(&led3);
+ timer0_Init(&tt);
+ while (1) {
 
+ }
 
-int main(int argc, char **argv) {
-
-    STD_ReturnType ret = (STD_ReturnType) 0x01;
-    ret = Interrupt_RBx_Init(&RB4_app);
-    ret = led_init(&led4);
-
-    while (1) {
-    }
-
-    return (0);
+ return(0);
 }

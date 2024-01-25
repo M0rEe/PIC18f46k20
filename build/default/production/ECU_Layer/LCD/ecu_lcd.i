@@ -4830,12 +4830,12 @@ STD_ReturnType lcd_4bit_intialize(const lcd_4bit_t *lcd) {
         for (i = 0; i < 4; i++) {
             gpio_pin_initialize(&(lcd->data_pin[i]));
         }
-        _delay((unsigned long)((20)*(16000000/4000.0)));
+        _delay((unsigned long)((20)*(8000000/4000.0)));
 
         ret = lcd_4bit_send_command(lcd, 0x38);
-        _delay((unsigned long)((5)*(16000000/4000.0)));
+        _delay((unsigned long)((5)*(8000000/4000.0)));
         ret = lcd_4bit_send_command(lcd, 0x38);
-        _delay((unsigned long)((150)*(16000000/4000000.0)));
+        _delay((unsigned long)((150)*(8000000/4000000.0)));
         ret = lcd_4bit_send_command(lcd, 0x38);
 
         ret = lcd_4bit_send_command(lcd, 0X01);
@@ -4958,12 +4958,12 @@ STD_ReturnType lcd_8bit_intialize(const lcd_8bit_t *lcd) {
         for (i = 0; i < 8; i++) {
             gpio_pin_initialize(&(lcd->data_pin[i]));
         }
-        _delay((unsigned long)((20)*(16000000/4000.0)));
+        _delay((unsigned long)((20)*(8000000/4000.0)));
 
         ret = lcd_8bit_send_command(lcd, 0x38);
-        _delay((unsigned long)((5)*(16000000/4000.0)));
+        _delay((unsigned long)((5)*(8000000/4000.0)));
         ret = lcd_8bit_send_command(lcd, 0x38);
-        _delay((unsigned long)((150)*(16000000/4000000.0)));
+        _delay((unsigned long)((150)*(8000000/4000000.0)));
         ret = lcd_8bit_send_command(lcd, 0x38);
 
         ret = lcd_8bit_send_command(lcd, 0X01);
@@ -5125,7 +5125,7 @@ static STD_ReturnType lcd_4bit_blink_en(lcd_4bit_t*lcd) {
         ret = (STD_ReturnType) 0x00;
     } else {
         ret = gpio_pin_write_logic(&(lcd->en), GPIO_HIGH);
-        _delay((unsigned long)((5)*(16000000/4000000.0)));
+        _delay((unsigned long)((5)*(8000000/4000000.0)));
         ret = gpio_pin_write_logic(&(lcd->en), GPIO_LOW);
     }
     return ret;
@@ -5183,7 +5183,7 @@ static STD_ReturnType lcd_8bit_blink_en(lcd_8bit_t*lcd) {
         ret = (STD_ReturnType) 0x00;
     } else {
         ret = gpio_pin_write_logic(&(lcd->en), GPIO_HIGH);
-        _delay((unsigned long)((5)*(16000000/4000000.0)));
+        _delay((unsigned long)((5)*(8000000/4000000.0)));
         ret = gpio_pin_write_logic(&(lcd->en), GPIO_LOW);
     }
     return ret;

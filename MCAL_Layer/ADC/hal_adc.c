@@ -40,7 +40,7 @@ STD_ReturnType ADC_INIT(const ADC_conf_t * obj)
 #if INTERRUPT_PRIORITY_LEVELS  == FEATURE_ENABLED
 		INTERRUPT_GlobalInterruptHighEnable();
 		INTERRUPT_GlobalInterruptLowEnable();
-
+		INTERRUPT_PriorityLevelEnable();
 		if (HIGH_PRIORITY == obj->priority) {
 			ADC_SET_HIGH_PRIORITY();
 		} else if (LOW_PRIORITY == obj->priority) {

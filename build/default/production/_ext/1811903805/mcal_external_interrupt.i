@@ -4830,6 +4830,7 @@ void RB6_ISR(uint8_t src);
 void RB7_ISR(uint8_t src);
 
 void ADC_ISR(void);
+void TMR0_ISR(void);
 # 8 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_external_interrupt.c" 2
 
 

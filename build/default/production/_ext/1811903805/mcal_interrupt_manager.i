@@ -4733,6 +4733,7 @@ void RB6_ISR(uint8_t src);
 void RB7_ISR(uint8_t src);
 
 void ADC_ISR(void);
+void TMR0_ISR(void);
 # 7 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c" 2
 
 uint8_t RB4_Flag = 1;
@@ -4742,6 +4743,8 @@ uint8_t RB7_Flag = 1;
 # 39 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c"
 void __attribute__((picinterrupt(("")))) InterruptManager()
 {
+
+
  if ((INTCONbits.INT0IE == 1) && (INTCONbits.INT0IF == 1)) {
   INT0_ISR();
  }
@@ -4751,6 +4754,10 @@ void __attribute__((picinterrupt(("")))) InterruptManager()
  if ((INTCON3bits.INT2IE == 1) && (INTCON3bits.INT2IF == 1)) {
   INT2_ISR();
  }
+
+
+
+
 
  if ((INTCONbits.RBIE == 1) && (INTCONbits.RBIF == 1) && (PORTBbits.RB4 == 1) &&(RB4_Flag == 1)) {
   RB4_Flag = 0;
@@ -4790,7 +4797,18 @@ void __attribute__((picinterrupt(("")))) InterruptManager()
   RB7_ISR(0);
  }
 
+
+
  if ((PIE1bits.ADIE == 1) && (PIR1bits.ADIF == 1)) {
   ADC_ISR();
  }
+
+
+
+ if ((INTCONbits.TMR0IE == 1) && (INTCONbits.TMR0IF == 1)) {
+  TMR0_ISR();
+ }
+
+
+
 }

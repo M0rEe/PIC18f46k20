@@ -7,7 +7,7 @@
 
 #ifndef ECU_LAYER_INIT_H
 #define	ECU_LAYER_INIT_H
-#include    "../MCAL_Layer/GPIO/hal_gpio.h"
+
 #include    "LED/ecu_led.h"
 #include    "LCD/ecu_lcd.h"
 #include    "7SEG/ecu_7seg.h"

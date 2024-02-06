@@ -4786,164 +4786,155 @@ typedef enum {
 }interrupt_priority_cfg;
 # 13 "MCAL_Layer/TIMER0/../Interrupt/mcal_internal_interrupt.h" 2
 # 15 "MCAL_Layer/TIMER0/hal_timer0.h" 2
-# 48 "MCAL_Layer/TIMER0/hal_timer0.h"
-typedef enum {
-    TIMER0_PRESCALER_BY_2=0,
-    TIMER0_PRESCALER_BY_4,
-    TIMER0_PRESCALER_BY_8,
-    TIMER0_PRESCALER_BY_16,
-    TIMER0_PRESCALER_BY_32,
-    TIMER0_PRESCALER_BY_64,
-    TIMER0_PRESCALER_BY_128,
-    TIMER0_PRESCALER_BY_256
-} timer0_prescaler_select_t;
+# 44 "MCAL_Layer/TIMER0/hal_timer0.h"
+typedef enum{
+    TIMER0_PRESCALER_DIV_BY_2= 0,
+    TIMER0_PRESCALER_DIV_BY_4,
+    TIMER0_PRESCALER_DIV_BY_8,
+    TIMER0_PRESCALER_DIV_BY_16,
+    TIMER0_PRESCALER_DIV_BY_32,
+    TIMER0_PRESCALER_DIV_BY_64,
+    TIMER0_PRESCALER_DIV_BY_128,
+    TIMER0_PRESCALER_DIV_BY_256
+}timer0_prescaler_select_t;
 
-typedef struct {
+typedef struct{
 
-    void (*callBack)(void);
-    interrupt_priority_cfg priority ;
+    void (* TMR0_InterruptHandler)(void);
+    interrupt_priority_cfg priority;
 
-    timer0_prescaler_select_t prescalerValue;
-    uint16_t preloadedValue;
-    uint8_t prescalerEnable : 1;
-    uint8_t counterEdge : 1;
-    uint8_t mode : 1;
-    uint8_t regSize : 1;
-    uint8_t Reserved :4;
-} timer0_t;
+    timer0_prescaler_select_t prescaler_value;
+    uint16_t timer0_preload_value;
+    uint8_t prescaler_enable : 1;
+    uint8_t timer0_counter_edge : 1;
+    uint8_t timer0_mode : 1;
+    uint8_t timer0_register_size : 1;
+    uint8_t timer0_reserved : 4;
+}timer0_t;
 
-STD_ReturnType timer0_Init(const timer0_t* obj);
-STD_ReturnType timer0_Deinit(const timer0_t* obj);
 
-STD_ReturnType timer0_Write_Value(const timer0_t* obj, uint16_t val);
-STD_ReturnType timer0_Read_Value(const timer0_t* obj, uint16_t* val);
+STD_ReturnType Timer0_Init(const timer0_t *_timer);
+STD_ReturnType Timer0_DeInit(const timer0_t *_timer);
+STD_ReturnType Timer0_Write_Value(const timer0_t *_timer, uint16_t _value);
+STD_ReturnType Timer0_Read_Value(const timer0_t *_timer, uint16_t *_value);
 # 8 "MCAL_Layer/TIMER0/hal_timer0.c" 2
 
-static __attribute__((inline)) void preScalerConfig(const timer0_t* obj);
-static __attribute__((inline)) void modeSelect(const timer0_t* obj);
-static __attribute__((inline)) void regSelectSize(const timer0_t* obj);
 
 
-static void (*Handler)(void) = ((void*)0);
 
 
-static uint16_t timer0PreloadValue = 0;
+static uint16_t timer0_preload = 0;
 
-void TMR0_ISR()
-{
- (INTCONbits.TMR0IF= 0);
- TMR0H = (uint8_t) ((timer0PreloadValue) >> 8);
- TMR0L = (uint8_t) (timer0PreloadValue);
- if (Handler)
-  Handler();
+static __attribute__((inline)) void Timer0_Prescaler_Config(const timer0_t *_timer);
+static __attribute__((inline)) void Timer0_Mode_Select(const timer0_t *_timer);
+static __attribute__((inline)) void Timer0_Register_Size_Config(const timer0_t *_timer);
+
+STD_ReturnType Timer0_Init(const timer0_t *_timer){
+    Std_ReturnType ret = (STD_ReturnType) 0x00;
+    if(((void*)0) == _timer){
+        ret = (STD_ReturnType) 0x00;
+    }
+    else{
+        (T0CONbits.TMR0ON = 0);
+        Timer0_Prescaler_Config(_timer);
+        Timer0_Mode_Select(_timer);
+        Timer0_Register_Size_Config(_timer);
+        TMR0H = (_timer->timer0_preload_value) >> 8;
+        TMR0L = (uint8)(_timer->timer0_preload_value);
+        timer0_preload = _timer->timer0_preload_value;
+# 58 "MCAL_Layer/TIMER0/hal_timer0.c"
+        (T0CONbits.TMR0ON = 1);
+        ret = (STD_ReturnType) 0x01;
+    }
+    return ret;
 }
 
-STD_ReturnType timer0_Init(const timer0_t* obj)
-{
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if ((((void*)0) == obj)) {
-  ret = (STD_ReturnType) 0x00;
- } else {
-  (T0CONbits.TMR0ON = 0);
-  preScalerConfig(obj);
-  modeSelect(obj);
-  regSelectSize(obj);
-  TMR0H = (uint8_t) ((obj->preloadedValue) >> 8);
-  TMR0L = (uint8_t) (obj->preloadedValue);
-  timer0PreloadValue = obj->preloadedValue;
-
-  (INTCONbits.TMR0IF= 0);
-  (INTCONbits.TMR0IE = 1);
-  Handler = obj->callBack;
-# 57 "MCAL_Layer/TIMER0/hal_timer0.c"
-  (INTCONbits.GIE = 1);
-  (INTCONbits.PEIE = 1);
+STD_ReturnType Timer0_DeInit(const timer0_t *_timer){
+    Std_ReturnType ret = (STD_ReturnType) 0x00;
+    if(((void*)0) == _timer){
+        ret = (STD_ReturnType) 0x00;
+    }
+    else{
+        (T0CONbits.TMR0ON = 0);
 
 
 
-  (T0CONbits.TMR0ON = 1);
- }
- return ret;
+        ret = (STD_ReturnType) 0x01;
+    }
+    return ret;
 }
 
-STD_ReturnType timer0_Deinit(const timer0_t* obj)
-{
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if ((((void*)0) == obj)) {
-  ret = (STD_ReturnType) 0x00;
- } else {
-  (T0CONbits.TMR0ON = 0);
-
-  (INTCONbits.TMR0IE = 0);
-
- }
- return ret;
+STD_ReturnType Timer0_Write_Value(const timer0_t *_timer, uint16_t _value){
+    Std_ReturnType ret = (STD_ReturnType) 0x00;
+    if(((void*)0) == _timer){
+        ret = (STD_ReturnType) 0x00;
+    }
+    else{
+        TMR0H = (_value) >> 8;
+        TMR0L = (uint8)(_value);
+        ret = (STD_ReturnType) 0x01;
+    }
+    return ret;
 }
 
-STD_ReturnType timer0_Write_Value(const timer0_t* obj, uint16_t val)
-{
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if ((((void*)0) == obj)) {
-  ret = (STD_ReturnType) 0x00;
- } else {
-  timer0PreloadValue = val;
-  TMR0H = (uint8_t) ((val) >> 8);
-  TMR0L = (uint8_t) (val);
- }
- return ret;
+STD_ReturnType Timer0_Read_Value(const timer0_t *_timer, uint16_t *_value){
+    Std_ReturnType ret = (STD_ReturnType) 0x00;
+    uint8 l_tmr0l = ZERO_INIT, l_tmr0h = ZERO_INIT;
+    if(((void*)0) == _timer){
+        ret = (STD_ReturnType) 0x00;
+    }
+    else{
+        l_tmr0l = TMR0L;
+        l_tmr0h = TMR0H;
+        *_value = (uint16)((l_tmr0h << 8) + l_tmr0l);
+        ret = (STD_ReturnType) 0x01;
+    }
+    return ret;
 }
 
-STD_ReturnType timer0_Read_Value(const timer0_t* obj, uint16_t* val)
-{
- STD_ReturnType ret = (STD_ReturnType) 0x01;
- if ((((void*)0) == obj) || (((void*)0) == val)) {
-  ret = (STD_ReturnType) 0x00;
- } else {
-  uint8_t l_lowValue = 0, l_highValue = 0;
-  l_lowValue = TMR0L;
-  l_highValue = TMR0H;
-  *val = (uint16_t) ((l_highValue << 8) + l_lowValue);
- }
- return ret;
+void TMR0_ISR(void){
+    TIMER0_InterruptFlagClear();
+    TMR0H = (timer0_preload) >> 8;
+    TMR0L = (uint8)(timer0_preload);
+    if(TMR0_InterruptHandler){
+        TMR0_InterruptHandler();
+    }
 }
 
-static __attribute__((inline)) void preScalerConfig(const timer0_t* obj)
-{
- if (1 == obj->prescalerEnable) {
-  (T0CONbits.PSA = 1);
-  T0CONbits.T0PS = obj->prescalerValue;
- } else if (0 == obj->prescalerEnable) {
-  (T0CONbits.PSA = 1);
- } else {
-
- }
+static __attribute__((inline)) void Timer0_Prescaler_Config(const timer0_t *_timer){
+    if(1 == _timer->prescaler_enable){
+        (T0CONbits.PSA = 0);
+        T0CONbits.T0PS = _timer->prescaler_value;
+    }
+    else if(0 == _timer->prescaler_enable){
+        (T0CONbits.PSA = 1);
+    }
+    else{ }
 }
 
-static __attribute__((inline)) void modeSelect(const timer0_t* obj)
-{
- if (0 == obj->mode) {
-  (T0CONbits.T0CS = 1);
-  if (0 == obj->counterEdge) {
-   (T0CONbits.T0SE = 1);
-  } else if (1 == obj->counterEdge) {
-   (T0CONbits.T0SE = 0);
-  } else {
-
-  }
- } else if (1 == obj->mode) {
-  (T0CONbits.T0CS = 0);
- } else {
-
- }
+static __attribute__((inline)) void Timer0_Mode_Select(const timer0_t *_timer){
+    if(1 == _timer->timer0_mode){
+        (T0CONbits.T0CS = 0);
+    }
+    else if(0 == _timer->timer0_mode){
+        (T0CONbits.T0CS = 1);
+        if(1 == _timer->timer0_counter_edge){
+            (T0CONbits.T0SE = 0);
+        }
+        else if(0 == _timer->timer0_counter_edge){
+            (T0CONbits.T0SE = 1);
+        }
+        else{ }
+    }
+    else{ }
 }
 
-static __attribute__((inline)) void regSelectSize(const timer0_t* obj)
-{
- if (1 == obj->regSize) {
-  (T0CONbits.T08BIT=1);
- } else if (0 == obj->regSize) {
-  (T0CONbits.T08BIT=0);
- } else {
-
- }
+static __attribute__((inline)) void Timer0_Register_Size_Config(const timer0_t *_timer){
+    if(1 == _timer->timer0_register_size){
+        (T0CONbits.T08BIT = 1);
+    }
+    else if(0 == _timer->timer0_register_size){
+        (T0CONbits.T08BIT = 0);
+    }
+    else{ }
 }

@@ -1,3 +1,4 @@
+
 /* 
  * File:   hal_timer0.h
  * Author: M0rE
@@ -15,17 +16,18 @@
 #include "../Interrupt/mcal_internal_interrupt.h"
 
 /*  Section : Macro Declarations     */
+#define TIMER0_TIMER_MODE_CFG                    1
+#define TIMER0_COUNTER_MODE_CFG                  0
+
 #define TIMER0_PRESCALER_ENABLE_CFG              1
 #define TIMER0_PRESCALER_DISABLE_CFG             0
+
+#define TIMER0_REGISTER_8BIT_CFG                 1
+#define TIMER0_REGISTER_16BIT_CFG                0
 
 #define TIMER0_RISING_EDGE_CFG                   1
 #define TIMER0_FALLING_EDGE_CFG                  0
 
-#define TIMER0_TIMER_MODE_CFG                    1
-#define TIMER0_COUNTER_MODE_CFG                  0
-
-#define TIMER0_REGISTER_8BIT_CFG                 1
-#define TIMER0_REGISTER_16BIT_CFG                0
 
 /*  Section : Macro Functions Declarations    */
 #define TIMER0_PRESCALER_ENABLE()                   (T0CONbits.PSA = 0)
@@ -37,8 +39,8 @@
 #define TIMER0_TIMER_MODE_ENABLE()                  (T0CONbits.T0CS = 0) 
 #define TIMER0_COUNTER_MODE_ENABLE()                (T0CONbits.T0CS = 1) 
 
-#define TIMER0_8BIT_MODE()                          (T0CONbits.T08BIT=1)
-#define TIMER0_16BIT_MODE()                         (T0CONbits.T08BIT=0)
+#define TIMER0_8BIT_MODE()                          (T0CONbits.T08BIT = 1)
+#define TIMER0_16BIT_MODE()                         (T0CONbits.T08BIT = 0)
 
 #define TIMER0_MODULE_ENABLE()                      (T0CONbits.TMR0ON = 1)
 #define TIMER0_MODULE_DISABLE()                     (T0CONbits.TMR0ON = 0)
@@ -58,7 +60,7 @@ typedef enum {
 
 typedef struct {
 #if TIMER0_INTERRUPT_FEATURE_ENABLE == FEATURE_ENABLED
-    void (*callBack)(void);
+    void (*TIMR0_CallBack)(void);
     interrupt_priority_cfg priority ;
 #endif
     timer0_prescaler_select_t prescalerValue;
@@ -78,4 +80,3 @@ STD_ReturnType timer0_Read_Value(const timer0_t* obj, uint16_t* val);
 
 
 #endif	/* HAL_TIMER0_H */
-

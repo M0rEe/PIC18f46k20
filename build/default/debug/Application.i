@@ -5089,37 +5089,37 @@ STD_ReturnType ADC_GetFrom_NON_BLOCKING(const ADC_conf_t * obj,ADC_CHANNELS_SELE
 # 19 "./Application.h" 2
 
 # 1 "./MCAL_Layer/TIMER0/hal_timer0.h" 1
-# 48 "./MCAL_Layer/TIMER0/hal_timer0.h"
-typedef enum {
-    TIMER0_PRESCALER_BY_2=0,
-    TIMER0_PRESCALER_BY_4,
-    TIMER0_PRESCALER_BY_8,
-    TIMER0_PRESCALER_BY_16,
-    TIMER0_PRESCALER_BY_32,
-    TIMER0_PRESCALER_BY_64,
-    TIMER0_PRESCALER_BY_128,
-    TIMER0_PRESCALER_BY_256
-} timer0_prescaler_select_t;
+# 44 "./MCAL_Layer/TIMER0/hal_timer0.h"
+typedef enum{
+    TIMER0_PRESCALER_DIV_BY_2= 0,
+    TIMER0_PRESCALER_DIV_BY_4,
+    TIMER0_PRESCALER_DIV_BY_8,
+    TIMER0_PRESCALER_DIV_BY_16,
+    TIMER0_PRESCALER_DIV_BY_32,
+    TIMER0_PRESCALER_DIV_BY_64,
+    TIMER0_PRESCALER_DIV_BY_128,
+    TIMER0_PRESCALER_DIV_BY_256
+}timer0_prescaler_select_t;
 
-typedef struct {
+typedef struct{
 
-    void (*callBack)(void);
-    interrupt_priority_cfg priority ;
+    void (* TMR0_InterruptHandler)(void);
+    interrupt_priority_cfg priority;
 
-    timer0_prescaler_select_t prescalerValue;
-    uint16_t preloadedValue;
-    uint8_t prescalerEnable : 1;
-    uint8_t counterEdge : 1;
-    uint8_t mode : 1;
-    uint8_t regSize : 1;
-    uint8_t Reserved :4;
-} timer0_t;
+    timer0_prescaler_select_t prescaler_value;
+    uint16_t timer0_preload_value;
+    uint8_t prescaler_enable : 1;
+    uint8_t timer0_counter_edge : 1;
+    uint8_t timer0_mode : 1;
+    uint8_t timer0_register_size : 1;
+    uint8_t timer0_reserved : 4;
+}timer0_t;
 
-STD_ReturnType timer0_Init(const timer0_t* obj);
-STD_ReturnType timer0_Deinit(const timer0_t* obj);
 
-STD_ReturnType timer0_Write_Value(const timer0_t* obj, uint16_t val);
-STD_ReturnType timer0_Read_Value(const timer0_t* obj, uint16_t* val);
+STD_ReturnType Timer0_Init(const timer0_t *_timer);
+STD_ReturnType Timer0_DeInit(const timer0_t *_timer);
+STD_ReturnType Timer0_Write_Value(const timer0_t *_timer, uint16_t _value);
+STD_ReturnType Timer0_Read_Value(const timer0_t *_timer, uint16_t *_value);
 # 21 "./Application.h" 2
 # 11 "Application.c" 2
 
@@ -5133,24 +5133,30 @@ led_t led3 = {
 
 void functionss(void)
 {
+
  flag++;
- (*(&LATC) ^= (0x01 << GPIO_PIN0));
+
+ led_toggle(&led3);
+
 };
-timer0_t tt = {
- .prescalerValue = TIMER0_PRESCALER_BY_64,
- .callBack = functionss,
- .preloadedValue = 0,
- .prescalerEnable = 1,
- .mode = 1,
- .regSize = 0,
+
+
+
+timer0_t timer0 = {
+ .TMR0_InterruptHandler = functionss,
+ .timer0_preload_value = 0,
+ .prescaler_enable = 0,
+ .timer0_mode = 0,
+ .timer0_register_size = 0,
+ .timer0_counter_edge = 1,
 };
 
 int main()
 {
  led_init(&led3);
- timer0_Init(&tt);
- while (1) {
 
+ Timer0_Init(&timer0);
+ while (1) {
  }
 
  return(0);

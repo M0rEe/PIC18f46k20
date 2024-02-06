@@ -92,6 +92,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "33
 [; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h: 33: void TMR0_ISR(void);
 [v _TMR0_ISR `(v ~T0 @X0 0 ef ]
+"34
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h: 34: void TMR1_ISR(void);
+[v _TMR1_ISR `(v ~T0 @X0 0 ef ]
+"35
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.h: 35: void TMR2_ISR(void);
+[v _TMR2_ISR `(v ~T0 @X0 0 ef ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4620.h
 [; <" PORTA equ 0F80h ;# ">
 "191
@@ -566,7 +572,29 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 105:  }
 }
 [e :U 286 ]
+"107
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 107:  if ((PIE1bits.TMR1IE == 1) && (PIR1bits.TMR1IF == 1)) {
+[e $ ! && == -> . . _PIE1bits 0 0 `i -> 1 `i == -> . . _PIR1bits 0 0 `i -> 1 `i 287  ]
+{
+"108
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 108:   TMR1_ISR();
+[e ( _TMR1_ISR ..  ]
 "109
-[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 109: }
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 109:  }
+}
+[e :U 287 ]
+"111
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 111:     if ((PIE1bits.TMR2IE == 1) && (PIR1bits.TMR2IF == 1)) {
+[e $ ! && == -> . . _PIE1bits 0 1 `i -> 1 `i == -> . . _PIR1bits 0 1 `i -> 1 `i 288  ]
+{
+"112
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 112:   TMR2_ISR();
+[e ( _TMR2_ISR ..  ]
+"113
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 113:  }
+}
+[e :U 288 ]
+"118
+[; ;C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c: 118: }
 [e :UE 273 ]
 }

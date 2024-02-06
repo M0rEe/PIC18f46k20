@@ -4962,196 +4962,66 @@ STD_ReturnType relayON(const relay_t * relay);
 STD_ReturnType relayOFF(const relay_t * relay);
 # 18 "./ECU_Layer/ecu_layer_init.h" 2
 # 13 "./Application.h" 2
-
-# 1 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h" 1
-# 12 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h"
-# 1 "./MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 1
-# 17 "./MCAL_Layer/Interrupt/mcal_interrupt_cfg.h"
-# 1 "./MCAL_Layer/Interrupt/mcal_interrupt_gen_cfg.h" 1
-# 17 "./MCAL_Layer/Interrupt/mcal_interrupt_cfg.h" 2
-# 52 "./MCAL_Layer/Interrupt/mcal_interrupt_cfg.h"
+# 11 "Application.c" 2
+# 1 "./MCAL_Layer/TIMER2/hal_timer2.h" 1
+# 17 "./MCAL_Layer/TIMER2/hal_timer2.h"
+# 1 "./MCAL_Layer/TIMER2/../Interrupt/mcal_internal_interrupt.h" 1
+# 13 "./MCAL_Layer/TIMER2/../Interrupt/mcal_internal_interrupt.h"
+# 1 "./MCAL_Layer/TIMER2/../Interrupt/mcal_interrupt_cfg.h" 1
+# 17 "./MCAL_Layer/TIMER2/../Interrupt/mcal_interrupt_cfg.h"
+# 1 "./MCAL_Layer/TIMER2/../Interrupt/mcal_interrupt_gen_cfg.h" 1
+# 17 "./MCAL_Layer/TIMER2/../Interrupt/mcal_interrupt_cfg.h" 2
+# 52 "./MCAL_Layer/TIMER2/../Interrupt/mcal_interrupt_cfg.h"
 typedef enum {
     LOW_PRIORITY=0,
     HIGH_PRIORITY
 }interrupt_priority_cfg;
-# 12 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h" 2
-# 74 "./MCAL_Layer/Interrupt/mcal_external_interrupt.h"
-typedef enum {
-    FALLING_EDGE = 0,
-    RISING_EDGE
-} interrupt_INTx_edge;
-
-typedef enum {
-    EXT_INT0 = 0,
-    EXT_INT1,
-    EXT_INT2
-} interrupt_INTx_src;
-
-typedef struct {
-    void(*callback_function)(void);
-    pin_config_t pin;
-    interrupt_INTx_edge edge;
-    interrupt_INTx_src src;
-    interrupt_priority_cfg priority;
-} Interrupt_INTx_t;
-
-typedef struct {
-    void(*callback_function_HIGH)(void);
-    void(*callback_function_LOW)(void);
-    pin_config_t pin;
-    interrupt_priority_cfg priority;
-} Interrupt_RBx_t;
-
-
-
-STD_ReturnType Interrupt_INTx_Init(Interrupt_INTx_t * obj);
-STD_ReturnType Interrupt_INTx_DeInit(Interrupt_INTx_t * obj);
-
-STD_ReturnType Interrupt_RBx_Init(Interrupt_RBx_t * obj);
-STD_ReturnType Interrupt_RBx_DeInit(Interrupt_RBx_t * obj);
-# 15 "./Application.h" 2
-
-# 1 "./MCAL_Layer/EEPROM/hal_eeprom.h" 1
-# 11 "./MCAL_Layer/EEPROM/hal_eeprom.h"
-# 1 "./MCAL_Layer/EEPROM/../Interrupt/mcal_internal_interrupt.h" 1
-# 11 "./MCAL_Layer/EEPROM/hal_eeprom.h" 2
-# 41 "./MCAL_Layer/EEPROM/hal_eeprom.h"
-STD_ReturnType EEPROM_ReadByte(uint16_t address,uint8_t* retData);
-STD_ReturnType EEPROM_WriteByte(uint16_t address,uint8_t retData);
-# 17 "./Application.h" 2
-
-# 1 "./MCAL_Layer/ADC/hal_adc.h" 1
-# 11 "./MCAL_Layer/ADC/hal_adc.h"
-# 1 "./MCAL_Layer/ADC/hal_adc_cfg.h" 1
-# 11 "./MCAL_Layer/ADC/hal_adc.h" 2
-# 68 "./MCAL_Layer/ADC/hal_adc.h"
-typedef enum {
-    ADC_CHANNEL_AN0 = 0,
-    ADC_CHANNEL_AN1,
-    ADC_CHANNEL_AN2,
-    ADC_CHANNEL_AN3,
-    ADC_CHANNEL_AN4,
-    ADC_CHANNEL_AN5,
-    ADC_CHANNEL_AN6,
-    ADC_CHANNEL_AN7,
-    ADC_CHANNEL_AN8,
-    ADC_CHANNEL_AN9,
-    ADC_CHANNEL_AN10,
-    ADC_CHANNEL_AN11,
-    ADC_CHANNEL_AN12
-} ADC_CHANNELS_SELECT_t;
-
-typedef enum {
-    ADC_0TAD = 0,
-    ADC_2TAD,
-    ADC_4TAD,
-    ADC_6TAD,
-    ADC_8TAD,
-    ADC_12TAD,
-    ADC_16TAD,
-    ADC_20TAD,
-} ADC_ACQ_TIME_t;
-
-typedef enum {
-    FoscBy2 = 0,
-    FoscBy8,
-    FoscBy32,
-    Frc,
-    FoscBy4,
-    FoscBy16,
-    FoscBy64,
-
-} ADC_CONVERSION_CLOCK_t;
-
+# 13 "./MCAL_Layer/TIMER2/../Interrupt/mcal_internal_interrupt.h" 2
+# 17 "./MCAL_Layer/TIMER2/hal_timer2.h" 2
+# 54 "./MCAL_Layer/TIMER2/hal_timer2.h"
 typedef struct {
 
-    void (*ADC_CallBack)(void);
+    void (*tmr2CallBack)(void);
     interrupt_priority_cfg priority;
 
-    ADC_ACQ_TIME_t aqcTime;
-    ADC_CONVERSION_CLOCK_t clk;
-    ADC_CHANNELS_SELECT_t ch;
-    uint8_t ADC_LR_ADJUST : 1;
-    uint8_t ADC_Vref : 1;
-    uint8_t Reserved : 6;
-} ADC_conf_t;
+    uint8_t preLoadedValue;
+    uint8_t postScalerValue :4;
+    uint8_t preScalerValue :2;
+    uint8_t Resserved :2;
+}Timer2_t;
 
+STD_ReturnType Timer2_Init(const Timer2_t* obj);
+STD_ReturnType Timer2_DeInit(const Timer2_t* obj);
+STD_ReturnType Timer2_ReadValue(const Timer2_t* obj,uint8_t * val);
+STD_ReturnType Timer2_WriteValue(Timer2_t* obj,uint8_t val);
+# 12 "Application.c" 2
 
-STD_ReturnType ADC_INIT(const ADC_conf_t * obj);
-STD_ReturnType ADC_DEINIT(const ADC_conf_t * obj);
-
-STD_ReturnType ADC_SelectChannnel( ADC_conf_t * obj, ADC_CHANNELS_SELECT_t channel);
-STD_ReturnType ADC_StartConversion(const ADC_conf_t * obj);
-STD_ReturnType ADC_IsConversionDone(const ADC_conf_t * obj, uint8_t * state);
-STD_ReturnType ADC_GetConversionRes(const ADC_conf_t * obj, uint16_t* res);
-STD_ReturnType ADC_GetResFrom(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel ,uint16_t* res);
-STD_ReturnType ADC_GetFrom_NON_BLOCKING(const ADC_conf_t * obj,ADC_CHANNELS_SELECT_t channel );
-# 19 "./Application.h" 2
-
-# 1 "./MCAL_Layer/TIMER0/hal_timer0.h" 1
-# 48 "./MCAL_Layer/TIMER0/hal_timer0.h"
-typedef enum {
-    TIMER0_PRESCALER_BY_2=0,
-    TIMER0_PRESCALER_BY_4,
-    TIMER0_PRESCALER_BY_8,
-    TIMER0_PRESCALER_BY_16,
-    TIMER0_PRESCALER_BY_32,
-    TIMER0_PRESCALER_BY_64,
-    TIMER0_PRESCALER_BY_128,
-    TIMER0_PRESCALER_BY_256
-} timer0_prescaler_select_t;
-
-typedef struct {
-
-    void (*callBack)(void);
-    interrupt_priority_cfg priority ;
-
-    timer0_prescaler_select_t prescalerValue;
-    uint16_t preloadedValue;
-    uint8_t prescalerEnable : 1;
-    uint8_t counterEdge : 1;
-    uint8_t mode : 1;
-    uint8_t regSize : 1;
-    uint8_t Reserved :4;
-} timer0_t;
-
-STD_ReturnType timer0_Init(const timer0_t* obj);
-STD_ReturnType timer0_Deinit(const timer0_t* obj);
-
-STD_ReturnType timer0_Write_Value(const timer0_t* obj, uint16_t val);
-STD_ReturnType timer0_Read_Value(const timer0_t* obj, uint16_t* val);
-# 21 "./Application.h" 2
-# 11 "Application.c" 2
-
-volatile uint16_t flag = 0;
-
-led_t led3 = {
- .port_name = PORTC_INDEX,
- .pin = GPIO_PIN0,
- .led_status = LED_OFF
+led_t led1 = {
+    .port_name = PORTD_INDEX,
+    .pin = GPIO_PIN1,
+    .led_status = LED_OFF
 };
 
-void functionss(void)
-{
- flag++;
- (*(&LATC) ^= (0x01 << GPIO_PIN0));
-};
-timer0_t tt = {
- .prescalerValue = TIMER0_PRESCALER_BY_8,
- .callBack = functionss,
- .preloadedValue = 3036,
- .prescalerEnable = 1,
- .mode = 1,
- .regSize = 0,
-};
 
-int main()
-{
- led_init(&led3);
- timer0_Init(&tt);
- while (1) {
 
- }
 
- return(0);
+void fun() {
+
+    (LATD ^= (0x01 << GPIO_PIN1));
+}
+
+int main() {
+    Timer2_t timer2_obj;
+    timer2_obj.tmr2CallBack = fun;
+    timer2_obj.preScalerValue = 2;
+    timer2_obj.postScalerValue = 15;
+    timer2_obj.preLoadedValue = 0;
+    led_init(&led1);
+
+    Timer2_Init(&timer2_obj);
+    while (1) {
+
+    }
+
+    return (0);
 }

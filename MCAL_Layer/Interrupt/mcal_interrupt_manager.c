@@ -103,6 +103,15 @@ void __interrupt() InterruptManager()
 	if ((INTCONbits.TMR0IE == INTERRUPT_ENABLE) && (INTCONbits.TMR0IF == INTERRUPT_OCCURE)) {
 		TMR0_ISR();
 	}
+    
+	if ((PIE1bits.TMR1IE == INTERRUPT_ENABLE) && (PIR1bits.TMR1IF == INTERRUPT_OCCURE)) {
+		TMR1_ISR();
+	}
+	
+    if ((PIE1bits.TMR2IE == INTERRUPT_ENABLE) && (PIR1bits.TMR2IF == INTERRUPT_OCCURE)) {
+		TMR2_ISR();
+	}
+    
 	/*--------------------------------------------------------------		TIMERs INTERRUPT		--------------------------------------------------------------------*/
 
 

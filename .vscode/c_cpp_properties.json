@@ -15,7 +15,8 @@
             "compilerPath": "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\bin\\xc8.exe",
             "cStandard": "c17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "windows-gcc-x64"
+            "intelliSenseMode": "${default}",
+            "mergeConfigurations": true
         }
     ],
     "version": 4

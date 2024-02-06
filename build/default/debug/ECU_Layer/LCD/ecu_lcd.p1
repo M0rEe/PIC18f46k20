@@ -381,20 +381,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 280 ]
 }
 "32
-[; ;ECU_Layer/LCD/ecu_lcd.c: 32:         _delay((unsigned long)((20)*(16000000/4000.0)));
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 32:         _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "34
 [; ;ECU_Layer/LCD/ecu_lcd.c: 34:         ret = lcd_4bit_send_command(lcd, 0x38);
 [e = _ret ( _lcd_4bit_send_command (2 , _lcd -> -> 56 `i `uc ]
 "35
-[; ;ECU_Layer/LCD/ecu_lcd.c: 35:         _delay((unsigned long)((5)*(16000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 35:         _delay((unsigned long)((5)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "36
 [; ;ECU_Layer/LCD/ecu_lcd.c: 36:         ret = lcd_4bit_send_command(lcd, 0x38);
 [e = _ret ( _lcd_4bit_send_command (2 , _lcd -> -> 56 `i `uc ]
 "37
-[; ;ECU_Layer/LCD/ecu_lcd.c: 37:         _delay((unsigned long)((150)*(16000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 37:         _delay((unsigned long)((150)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "38
 [; ;ECU_Layer/LCD/ecu_lcd.c: 38:         ret = lcd_4bit_send_command(lcd, 0x38);
 [e = _ret ( _lcd_4bit_send_command (2 , _lcd -> -> 56 `i `uc ]
@@ -816,20 +816,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 313 ]
 }
 "160
-[; ;ECU_Layer/LCD/ecu_lcd.c: 160:         _delay((unsigned long)((20)*(16000000/4000.0)));
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 160:         _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "162
 [; ;ECU_Layer/LCD/ecu_lcd.c: 162:         ret = lcd_8bit_send_command(lcd, 0x38);
 [e = _ret ( _lcd_8bit_send_command (2 , _lcd -> -> 56 `i `uc ]
 "163
-[; ;ECU_Layer/LCD/ecu_lcd.c: 163:         _delay((unsigned long)((5)*(16000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 163:         _delay((unsigned long)((5)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "164
 [; ;ECU_Layer/LCD/ecu_lcd.c: 164:         ret = lcd_8bit_send_command(lcd, 0x38);
 [e = _ret ( _lcd_8bit_send_command (2 , _lcd -> -> 56 `i `uc ]
 "165
-[; ;ECU_Layer/LCD/ecu_lcd.c: 165:         _delay((unsigned long)((150)*(16000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 165:         _delay((unsigned long)((150)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "166
 [; ;ECU_Layer/LCD/ecu_lcd.c: 166:         ret = lcd_8bit_send_command(lcd, 0x38);
 [e = _ret ( _lcd_8bit_send_command (2 , _lcd -> -> 56 `i `uc ]
@@ -1386,8 +1386,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_Layer/LCD/ecu_lcd.c: 326:         ret = gpio_pin_write_logic(&(lcd->en), GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , &U . *U _lcd 1 . `E2972 1 ]
 "327
-[; ;ECU_Layer/LCD/ecu_lcd.c: 327:         _delay((unsigned long)((5)*(16000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 327:         _delay((unsigned long)((5)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "328
 [; ;ECU_Layer/LCD/ecu_lcd.c: 328:         ret = gpio_pin_write_logic(&(lcd->en), GPIO_LOW);
 [e = _ret ( _gpio_pin_write_logic (2 , &U . *U _lcd 1 . `E2972 0 ]
@@ -1582,8 +1582,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_Layer/LCD/ecu_lcd.c: 384:         ret = gpio_pin_write_logic(&(lcd->en), GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , &U . *U _lcd 1 . `E2972 1 ]
 "385
-[; ;ECU_Layer/LCD/ecu_lcd.c: 385:         _delay((unsigned long)((5)*(16000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ECU_Layer/LCD/ecu_lcd.c: 385:         _delay((unsigned long)((5)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "386
 [; ;ECU_Layer/LCD/ecu_lcd.c: 386:         ret = gpio_pin_write_logic(&(lcd->en), GPIO_LOW);
 [e = _ret ( _gpio_pin_write_logic (2 , &U . *U _lcd 1 . `E2972 0 ]

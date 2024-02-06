@@ -4734,6 +4734,8 @@ void RB7_ISR(uint8_t src);
 
 void ADC_ISR(void);
 void TMR0_ISR(void);
+void TMR1_ISR(void);
+void TMR2_ISR(void);
 # 7 "C:/Users/Om562/MPLABXProjects/PIC18/MCAL_Layer/Interrupt/mcal_interrupt_manager.c" 2
 
 uint8_t RB4_Flag = 1;
@@ -4808,6 +4810,15 @@ void __attribute__((picinterrupt(("")))) InterruptManager()
  if ((INTCONbits.TMR0IE == 1) && (INTCONbits.TMR0IF == 1)) {
   TMR0_ISR();
  }
+
+ if ((PIE1bits.TMR1IE == 1) && (PIR1bits.TMR1IF == 1)) {
+  TMR1_ISR();
+ }
+
+    if ((PIE1bits.TMR2IE == 1) && (PIR1bits.TMR2IF == 1)) {
+  TMR2_ISR();
+ }
+
 
 
 

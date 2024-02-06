@@ -8,38 +8,36 @@
 
 
 #include "Application.h"
+#include "MCAL_Layer/TIMER2/hal_timer2.h"
 
-volatile uint16_t flag = 0;
-
-led_t led3 = {
-	.port_name = PORTC_INDEX,
-	.pin = GPIO_PIN0,
-	.led_status = LED_OFF
+led_t led1 = {
+    .port_name = PORTD_INDEX,
+    .pin = GPIO_PIN1, 
+    .led_status = LED_OFF
 };
 
-void functionss(void)
-{
-	flag++;
-	TOGGLE_BIT(*(&LATC), GPIO_PIN0);
-};
-timer0_t tt = {
-	.prescalerValue = TIMER0_PRESCALER_BY_8,
-	.callBack = functionss,
-	.preloadedValue = 3036,
-	.prescalerEnable = TIMER0_PRESCALER_ENABLE_CFG,
-	.mode = TIMER0_TIMER_MODE_CFG,
-	.regSize = TIMER0_REGISTER_16BIT_CFG,
-};
 
-int main()
-{
-	led_init(&led3);
-	timer0_Init(&tt);
-	while (1) {
 
-	}
 
-	return(EXIT_SUCCESS);
+void fun() {
+    //led_toggle(&led1);
+    TOGGLE_BIT(LATD,GPIO_PIN1);
+}
+
+int main() {
+    Timer2_t timer2_obj;
+    timer2_obj.tmr2CallBack = fun;
+    timer2_obj.preScalerValue = TIMER2_PRESCALER_DIV_BY_16;
+    timer2_obj.postScalerValue = TIMER2_POSTSCALER_DIV_BY_16;
+    timer2_obj.preLoadedValue = 0;
+    led_init(&led1);
+
+    Timer2_Init(&timer2_obj);
+    while (1) {
+        
+    }
+
+    return (EXIT_SUCCESS);
 }
 
 
